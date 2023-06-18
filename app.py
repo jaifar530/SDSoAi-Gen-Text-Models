@@ -21,7 +21,12 @@ headers = {"Authorization": "Bearer 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"}
 def get_entities(text):
     data = {"inputs": text}
     response = requests.post(API_URL, headers=headers, json=data)
-    entities = [item['entity_group'] for item in response.json()[0]]
+    try:
+        entities = [item['entity_group'] for item in response.json()[0]]
+    except Exception as e:
+        print("Error:", e)
+        print("Response:", response.content)
+        entities = []
     return len(entities)
 
 # Set up lemmatizer
