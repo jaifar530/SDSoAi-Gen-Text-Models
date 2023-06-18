@@ -49,7 +49,8 @@ with open('RandomForestClassifier.pkl', 'rb') as file:
 
 input_paragraph = st.text_area("Input your text here")
 words_counts = word_tokenize(input_paragraph)
-st.write('Words counts: ', sum(len(words_count) for words_count in words_counts))
+final_words = sum(len(words_count) for words_count in words_counts)
+st.write('Words counts: ', final_words)
 
 
 
@@ -115,7 +116,7 @@ def extract_features(text):
 
 
 # Creates a button named 'Press me'
-press_me_button = st.button("Press me")
+press_me_button = st.button("Which Model Used?")
 
 if press_me_button:
     input_features = df['paragraph'].apply(extract_features)
