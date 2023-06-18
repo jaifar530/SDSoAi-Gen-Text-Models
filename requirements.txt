@@ -4,4 +4,4 @@ pandas
 nltk
 spacy
 numpy
-sklearn
+scikit-learn
