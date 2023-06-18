@@ -114,7 +114,7 @@ press_me_button = st.button("Press me")
 if press_me_button:
     input_features = df['paragraph'].apply(extract_features)
     predicted_llm = clf_loaded.predict(input_features)
-    st.write(f"Predicted LLM: {predicted_llm[0]}")
+    #st.write(f"Predicted LLM: {predicted_llm[0]}")
 
     predicted_proba = clf_loaded.predict_proba(input_features)
     probabilities = predicted_proba[0]
@@ -133,10 +133,10 @@ if press_me_button:
     prob_dict = {k: f'{v*100:.2f}%' for k, v in sorted(prob_dict.items(), key=lambda item: item[1], reverse=True)}
 
     # Print the dictionary
-    st.write(prob_dict)
+    #st.write(prob_dict)
 
     # Create a progress bar and a bar chart for each LLM
     for llm, prob in prob_dict.items():
         st.write(llm + ': ' + prob)
         st.progress(float(prob.strip('%'))/100)
-    st.bar_chart(prob_dict)
+
