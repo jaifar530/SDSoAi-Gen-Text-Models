@@ -48,6 +48,7 @@ with open('RandomForestClassifier.pkl', 'rb') as file:
 
 
 input_paragraph = st.text_area("Input your text here")
+st.write('Words counts: ', word_tokenize(input_paragraph))
 
 # df = pd.DataFrame(columns=["paragraph"])
 # df = df.append({"paragraph": input_paragraph}, ignore_index=True)
