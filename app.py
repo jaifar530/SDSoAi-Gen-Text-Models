@@ -49,8 +49,10 @@ with open('RandomForestClassifier.pkl', 'rb') as file:
 
 input_paragraph = st.text_area("Input your text here")
 
-df = pd.DataFrame(columns=["paragraph"])
-df = df.append({"paragraph": input_paragraph}, ignore_index=True)
+# df = pd.DataFrame(columns=["paragraph"])
+# df = df.append({"paragraph": input_paragraph}, ignore_index=True)
+
+df = pd.DataFrame([input_paragraph], columns=["paragraph"])
 
 
 
