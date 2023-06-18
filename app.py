@@ -101,3 +101,19 @@ if press_me_button:
     input_features = df['paragraph'].apply(extract_features)
     predicted_llm = clf_loaded.predict(input_features)
     st.write(f"Predicted LLM: {predicted_llm[0]}")
+    
+    predicted_proba = clf_loaded.predict_proba(input_features)
+    probabilities = predicted_proba[0]
+    labels = clf_loaded.classes_
+
+    # Create a mapping from old labels to new labels
+    label_mapping = {1: 'gpt3', 2: 'gpt4', 3: 'googlebard', 4: 'huggingface'}
+
+    # Apply the mapping to the labels
+    new_labels = [label_mapping[label] for label in labels]
+
+    # Create a dictionary that maps new labels to probabilities
+    prob_dict = dict(zip(new_labels, probabilities))
+
+    # Print the dictionary
+    print(prob_dict)
