@@ -11,7 +11,7 @@ import requests
 import pickle
 import pandas as pd
 import nltk
-import spacy
+# import spacy
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
 import numpy as np
@@ -40,6 +40,16 @@ with open('RandomForestClassifier.pkl', 'rb') as file:
 
 
 # Loading a SpaCy model for Named Entity Recognition and Lemmatization
+!pip install https://huggingface.co/spacy/en_core_web_sm/resolve/main/en_core_web_sm-any-py3-none-any.whl
+
+# Using spacy.load().
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
+# # Importing as module.
+# import en_core_web_sm
+# nlp = en_core_web_sm.load()
+
 nlp = spacy.load('en_core_web_sm')
 
 # # Your input paragraph
