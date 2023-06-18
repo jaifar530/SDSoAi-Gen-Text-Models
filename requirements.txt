@@ -1,6 +1,5 @@
 nltk
 requests
-pickle
 pandas
 nltk
 spacy
