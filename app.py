@@ -127,7 +127,16 @@ if press_me_button:
     new_labels = [label_mapping[label] for label in labels]
 
     # Create a dictionary that maps new labels to probabilities
-    prob_dict = dict(zip(new_labels, probabilities))
+    prob_dict = {k: v for k, v in zip(new_labels, probabilities)}
+
+    # Convert probabilities to percentages and sort the dictionary in descending order
+    prob_dict = {k: f'{v*100:.2f}%' for k, v in sorted(prob_dict.items(), key=lambda item: item[1], reverse=True)}
 
     # Print the dictionary
     st.write(prob_dict)
+
+    # Create a progress bar and a bar chart for each LLM
+    for llm, prob in prob_dict.items():
+        st.write(llm)
+        st.progress(float(prob.strip('%')))
+    st.bar_chart(prob_dict)
