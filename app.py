@@ -138,5 +138,5 @@ if press_me_button:
     # Create a progress bar and a bar chart for each LLM
     for llm, prob in prob_dict.items():
         st.write(llm)
-        st.progress(float(prob.strip('%')))
+        st.progress(float(prob.strip('%'))/100)
     st.bar_chart(prob_dict)
