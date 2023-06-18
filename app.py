@@ -47,20 +47,6 @@ with open('RandomForestClassifier.pkl', 'rb') as file:
     clf_loaded = pickle.load(file)
 
 
-
-# # Loading a SpaCy model for Named Entity Recognition and Lemmatization
-# !pip install https://huggingface.co/spacy/en_core_web_sm/resolve/main/en_core_web_sm-any-py3-none-any.whl
-
-# Using spacy.load().
-nlp = spacy.load('en_core_web_sm')
-
-# # Your input paragraph
-# input_paragraph = "Your paragraph here..."
-
-# # Read the paragraph from a text file
-# with open('paragraph.txt', 'r') as file:
-#     input_paragraph = file.read()
-
 input_paragraph = st.text_area("Input your text here")
 
 df = pd.DataFrame(columns=["paragraph"])
