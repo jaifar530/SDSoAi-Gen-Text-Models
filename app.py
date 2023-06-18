@@ -51,7 +51,7 @@ with open('RandomForestClassifier.pkl', 'rb') as file:
 
 input_paragraph = st.text_area("Input your text here")
 df = pd.DataFrame(columns=["paragraph"])
-df = df.append({"paragraph": input_paragraph}, ignore_index=True)
+df = df.concat({"paragraph": input_paragraph}, ignore_index=True)
 
 num_words = 500
 input_paragraph = ' '.join(word_tokenize(input_paragraph)[:num_words])
@@ -65,6 +65,7 @@ def extract_features(text):
     stopword_count = len([word for word in words if word in stopwords.words('english')])
     lemma_count = len(set(lemmatizer.lemmatize(word) for word in words))
     named_entity_count = get_entities(text)
+    st.write(named_entity_count)
     tagged_words = nltk.pos_tag(words)
     pos_counts = nltk.FreqDist(tag for (word, tag) in tagged_words)
     pos_features = {
@@ -101,7 +102,7 @@ if press_me_button:
     input_features = df['paragraph'].apply(extract_features)
     predicted_llm = clf_loaded.predict(input_features)
     st.write(f"Predicted LLM: {predicted_llm[0]}")
-    
+
     predicted_proba = clf_loaded.predict_proba(input_features)
     probabilities = predicted_proba[0]
     labels = clf_loaded.classes_
@@ -116,4 +117,4 @@ if press_me_button:
     prob_dict = dict(zip(new_labels, probabilities))
 
     # Print the dictionary
-    print(prob_dict)
+    st.write(prob_dict)
