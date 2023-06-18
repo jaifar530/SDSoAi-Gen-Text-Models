@@ -17,4 +17,4 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://jaifar:$HF_TOKEN@huggingface.co/spaces/jaifar/Smart-Detection-System-of-AI-Generated-Text-Models main
+        run: git push --force https://jaifar:$HF_TOKEN@huggingface.co/spaces/jaifar/Smart-Detection-System-of-AI-Generated-Text-Models main
