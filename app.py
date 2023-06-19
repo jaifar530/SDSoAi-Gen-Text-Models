@@ -72,7 +72,7 @@ def extract_features(text):
     words = word_tokenize(text)
     sentences = sent_tokenize(text)
 
-    avg_word_length = sum(len(word) for word in words) / len(words)
+    avg_word_length = sum(len(word) for word in words if word.isalpha()) / len(words)
     avg_sent_length = sum(len(sent) for sent in sentences) / len(sentences)
     punctuation_count = len([char for char in text if char in '.,;:?!'])
     stopword_count = len([word for word in words if word in stopwords.words('english')])
