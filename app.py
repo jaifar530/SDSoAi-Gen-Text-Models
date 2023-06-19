@@ -49,7 +49,7 @@ with open('RandomForestClassifier.pkl', 'rb') as file:
 
 input_paragraph = st.text_area("Input your text here")
 words_counts = word_tokenize(input_paragraph)
-final_words = sum(len(words_count) for words_count in words_counts)
+final_words = len(words_counts)
 st.write('Words counts: ', final_words)
 
 
