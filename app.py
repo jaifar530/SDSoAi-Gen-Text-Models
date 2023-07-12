@@ -23,7 +23,7 @@ nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
 
 #version
-st.markdown("v1.8")
+st.markdown("v1.88")
 
 
 # URL of the text file
