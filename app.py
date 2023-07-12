@@ -1,11 +1,4 @@
 import streamlit as st
-
-#title 
-st.title("Smart Detection System of AI-Generated Text Models")
-
-#subtitle 
-st.markdown("This is a POC for Smart Detection System of AI Generated Text Models project (:blue[MSc Data Analytics]), it is a pre-trained model that detect the probablities of using any of the known LLM (chatgpt3, chatgpt4, GoogleBard, HuggingfaceChat)")
-
 import os
 import requests
 import pickle
@@ -19,6 +12,7 @@ import numpy as np
 from nltk.stem import WordNetLemmatizer
 from nltk import ne_chunk, pos_tag, word_tokenize
 from nltk.tree import Tree
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 nltk.download('wordnet')
 nltk.download('maxent_ne_chunker')
 nltk.download('words')
@@ -27,6 +21,27 @@ nltk.download('words')
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
+
+
+#title 
+st.title("Smart Detection System of AI-Generated Text Models")
+
+#subtitle 
+st.markdown("This is a POC for Smart Detection System of AI Generated Text Models project (:blue[MSc Data Analytics]), it is a pre-trained model that detect the probablities of using any of the known LLM (chatgpt3, chatgpt4, GoogleBard, HuggingfaceChat)")
+
+#input text 
+input_paragraph = st.text_area("Input your text here")
+words_counts = word_tokenize(input_paragraph)
+final_words = len(words_counts)
+st.write('Words counts: ', final_words)
+
+# Define your options
+options = ["AI vs AI - RandomForest - 88 Samples", "AI vs AI - Ridge - 2000 Samples", "AI vs Human"]
+
+# Create a dropdown menu with "Option 2" as the default
+# selected_option = st.selectbox('Select an Option', options, index=1)
+selected_option = st.selectbox('Select an Option', options)
+
 
 # Check if the file exists
 if not os.path.isfile('RandomForestClassifier.pkl'):
@@ -42,15 +57,20 @@ if not os.path.isfile('RandomForestClassifier.pkl'):
     with open('RandomForestClassifier.pkl', 'wb') as file:
         file.write(response.content)
 
-# At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
-with open('RandomForestClassifier.pkl', 'rb') as file:
-    clf_loaded = pickle.load(file)
 
+# Check if the file exists
+if not os.path.isfile('AI_vs_AI_Ridge_2000_Samples.pkl'):
+    # Download the zip file if it doesn't exist
+    url = 'https://jaifar.net/AI_vs_AI_Ridge_2000_Samples.pkl'
+    headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+    }
 
-input_paragraph = st.text_area("Input your text here")
-words_counts = word_tokenize(input_paragraph)
-final_words = len(words_counts)
-st.write('Words counts: ', final_words)
+    response = requests.get(url, headers=headers)
+
+    # Save the file
+    with open('AI_vs_AI_Ridge_2000_Samples.pkl', 'wb') as file:
+        file.write(response.content)
 
 
 
@@ -68,7 +88,8 @@ num_words = 500
 input_paragraph = ' '.join(word_tokenize(input_paragraph)[:num_words])
 
 # Extracting features
-def extract_features(text):
+def extract_features_AI_vs_AI_Ridge_2000_Samples(text):
+    
     words = word_tokenize(text)
     sentences = sent_tokenize(text)
 
@@ -93,13 +114,18 @@ def extract_features(text):
         'pos_WDT': pos_counts['WDT'],
         'pos_TO': pos_counts['TO'],
         'pos_VB': pos_counts['VB'],
+        'pos_PRP': pos_counts['PRP'],
+        'pos_VBP': pos_counts['VBP'],
         'pos_VBG': pos_counts['VBG'],
         'pos_.': pos_counts['.'],
         'pos_JJ': pos_counts['JJ'],
         'pos_NNS': pos_counts['NNS'],
         'pos_RB': pos_counts['RB'],
+        'pos_PRP$': pos_counts['PRP$'],
         'pos_CC': pos_counts['CC'],
+        'pos_MD': pos_counts['MD'],
         'pos_VBN': pos_counts['VBN'],
+        'pos_NNP': pos_counts['NNP'],
     }
 
     features = {
@@ -110,18 +136,35 @@ def extract_features(text):
         'lemma_count': lemma_count,
         'named_entity_count': named_entity_count,
     }
-    features.update(pos_features)
+    # features.update(pos_features)
+    features = pd.concat([features, pd.DataFrame(pos_features, index=[0])], axis=1)
 
     return pd.Series(features)
 
+# Function from Code(2)
+def add_vectorized_features(df):
+    vectorizer = CountVectorizer()
+    tfidf_vectorizer = TfidfVectorizer()
+    X_bow = vectorizer.fit_transform(df['paragraph'])
+    X_tfidf = tfidf_vectorizer.fit_transform(df['paragraph'])
+    df_bow = pd.DataFrame(X_bow.toarray(), columns=vectorizer.get_feature_names_out())
+    df_tfidf = pd.DataFrame(X_tfidf.toarray(), columns=tfidf_vectorizer.get_feature_names_out())
+    df = pd.concat([df, df_bow, df_tfidf], axis=1)
+    return df
 
-# Creates a button named 'Press me'
-press_me_button = st.button("Which Model Used?")
 
-if press_me_button:
+# Function define 
+def AI_vs_AI_RandomForest_88_Samples(df):
+    
+    # At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
+    with open('RandomForestClassifier.pkl', 'rb') as file:
+        clf_loaded = pickle.load(file)
+    
     input_features = df['paragraph'].apply(extract_features)
+
     predicted_llm = clf_loaded.predict(input_features)
-    #st.write(f"Predicted LLM: {predicted_llm[0]}")
+    st.write(f"Predicted LLM: {predicted_llm[0]}")
+
 
     predicted_proba = clf_loaded.predict_proba(input_features)
     probabilities = predicted_proba[0]
@@ -146,4 +189,49 @@ if press_me_button:
     for llm, prob in prob_dict.items():
         st.write(llm + ': ' + prob)
         st.progress(float(prob.strip('%'))/100)
+    return 
+
+def AI_vs_AI_Ridge_2000_Samples(df):
+
+    # At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
+    with open('AI_vs_AI_Ridge_2000_Samples.pkl', 'rb') as file:
+        clf_loaded = pickle.load(file)
+
+    
+    input_features = df['paragraph'].apply(extract_features_AI_vs_AI_Ridge_2000_Samples)
+
+    # Here, input_features is a DataFrame, not a Series
+    input_features = pd.concat(input_features.values, ignore_index=True)
+
+    # Add new vectorized features
+    df = add_vectorized_features(df)
+
+    # Concatenate input_features and df along columns
+    final_features = pd.concat([input_features, df], axis=1)
+
+    predicted_llm = clf_loaded.predict(final_features)
+    st.write(f"Predicted LLM: {predicted_llm[0]}")
+
+    return
+
+
+# Creates a button named 'Press me'
+press_me_button = st.button("Which Model Used?")
+
+if press_me_button:
+    
+    # Use the selected option to control the flow of your application
+    if selected_option == "AI vs AI - RandomForest - 88 Samples":
+        AI_vs_AI_RandomForest_88_Samples(df)
+
+    elif selected_option == "AI vs AI - Ridge - 2000 Samples":
+        AI_vs_AI_Ridge_2000_Samples(df)
+
+    elif selected_option == "AI vs Human":
+        st.write("You selected AI vs Human!")
+
+
+
+
+
 
