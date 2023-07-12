@@ -233,9 +233,9 @@ def AI_vs_AI_RandomForest_88_Samples(df):
         with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file:
             file.write(response.content)
 
-    # At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
-    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'rb') as file:
-        clf_loaded = pickle.load(file)
+        # At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
+        with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'rb') as file:
+            clf_loaded = pickle.load(file)
 
     input_features = df['paragraph'].apply(extract_features_AI_vs_AI_RandomForest_88_Samples)
     try:
