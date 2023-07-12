@@ -87,7 +87,11 @@ num_words = 500
 # Retrieving only the first num_words words of the paragraph
 input_paragraph = ' '.join(word_tokenize(input_paragraph)[:num_words])
 
-# Extracting features
+
+
+
+
+# Extracting features for AI_vs_AI_Ridge_2000_Samples
 def extract_features_AI_vs_AI_Ridge_2000_Samples(text):
     
     words = word_tokenize(text)
