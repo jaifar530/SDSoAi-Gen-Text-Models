@@ -23,7 +23,7 @@ nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
 
 #version
-st.markdown("v1.5")
+st.markdown("v1.6")
 
 
 # URL of the text file
@@ -55,7 +55,7 @@ st.title("Smart Detection System of AI-Generated Text Models")
 st.markdown("This is a POC for Smart Detection System of AI Generated Text Models project (:blue[MSc Data Analytics]), it is a pre-trained model that detect the probablities of using any of the known LLM (chatgpt3, chatgpt4, GoogleBard, HuggingfaceChat)")
 
 #input text 
-input_paragraph = st.text_area("Input your text here", value=content)
+input_paragraph = st.text_area("Input your text here")
 words_counts = word_tokenize(input_paragraph)
 final_words = len(words_counts)
 st.write('Words counts: ', final_words)
