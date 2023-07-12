@@ -301,7 +301,6 @@ try:
         clf_loaded = pickle.load(file)
 except Exception as e:
     st.write(f"An error occurred while loading AI_vs_AI_RandomForest_88_Samples.pkl: {str(e)}")
-    return  # This will exit the function
 
 # Creates a button
 press_me_button = st.button("Which Model Used?")
