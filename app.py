@@ -205,7 +205,7 @@ def AI_vs_AI_RandomForest_88_Samples(df):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
         }
 
-    response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers)
 
     # Save the file
     with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file1:
