@@ -238,11 +238,9 @@ def AI_vs_AI_RandomForest_88_Samples(df):
             clf_loaded = pickle.load(file)
 
     input_features = df['paragraph'].apply(extract_features_AI_vs_AI_RandomForest_88_Samples)
-
-    predicted_llm = clf_loaded.predict(input_features)
-    st.write(f"Predicted LLM: {predicted_llm[0]}")
-
     try:
+        predicted_llm = clf_loaded.predict(input_features)
+        st.write(f"Predicted LLM: {predicted_llm[0]}")
         predicted_proba = clf_loaded.predict_proba(input_features)
     except Exception as e:
         st.write(f"An error occurred: {str(e)}")
