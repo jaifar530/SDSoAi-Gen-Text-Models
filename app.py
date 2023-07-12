@@ -54,8 +54,8 @@ if not os.path.isfile('AI_vs_AI_RandomForest_88_Samples.pkl'):
     response = requests.get(url, headers=headers)
 
     # Save the file
-    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file:
-        file.write(response.content)
+    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file1:
+        file1.write(response.content)
 
 
 # Check if the file exists
@@ -69,8 +69,8 @@ if not os.path.isfile('AI_vs_AI_Ridge_2000_Samples.pkl'):
     response = requests.get(url, headers=headers)
 
     # Save the file
-    with open('AI_vs_AI_Ridge_2000_Samples.pkl', 'wb') as file:
-        file.write(response.content)
+    with open('AI_vs_AI_Ridge_2000_Samples.pkl', 'wb') as file2:
+        file2.write(response.content)
 
 
 
@@ -207,8 +207,8 @@ def add_vectorized_features(df):
 def AI_vs_AI_RandomForest_88_Samples(df):
     
     # At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
-    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'rb') as file:
-        clf_loaded = pickle.load(file)
+    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'rb') as file1:
+        clf_loaded = pickle.load(file1)
     
     input_features = df['paragraph'].apply(extract_features_AI_vs_AI_RandomForest_88_Samples)
 
@@ -244,8 +244,8 @@ def AI_vs_AI_RandomForest_88_Samples(df):
 def AI_vs_AI_Ridge_2000_Samples(df):
 
     # At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
-    with open('AI_vs_AI_Ridge_2000_Samples.pkl', 'rb') as file:
-        clf_loaded = pickle.load(file)
+    with open('AI_vs_AI_Ridge_2000_Samples.pkl', 'rb') as file2:
+        clf_loaded = pickle.load(file2)
 
     
     input_features = df['paragraph'].apply(extract_features_AI_vs_AI_Ridge_2000_Samples)
@@ -265,7 +265,7 @@ def AI_vs_AI_Ridge_2000_Samples(df):
     return
 
 
-# Creates a button named 'Press me'
+# Creates a button
 press_me_button = st.button("Which Model Used?")
 
 if press_me_button:
