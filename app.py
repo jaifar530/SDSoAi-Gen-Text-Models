@@ -22,6 +22,9 @@ nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
 
+#version
+st.markdown("v1.2")
+           
 
 #title 
 st.title("Smart Detection System of AI-Generated Text Models")
