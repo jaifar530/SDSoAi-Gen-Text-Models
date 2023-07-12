@@ -219,38 +219,16 @@ def add_vectorized_features(df):
 # Function define AI_vs_AI_RandomForest_88_Samples
 def AI_vs_AI_RandomForest_88_Samples(df):
     
-    # Check if the file exists
-    if not os.path.isfile('AI_vs_AI_RandomForest_88_Samples.pkl'):
-    # Download the zip file if it doesn't exist
-        url = 'https://jaifar.net/AI_vs_AI_RandomForest_88_Samples.pkl'
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
-        }
-
-        response = requests.get(url, headers=headers)
-
-        # Save the file
-        try:
-            with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file:
-                file.write(response.content)
-        except Exception as e:
-            st.write(f"An error occurred while writing AI_vs_AI_RandomForest_88_Samples.pkl: {str(e)}") 
-
-    try:
-        with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'rb') as file:
-            clf_loaded = pickle.load(file)
-    except Exception as e:
-        st.write(f"An error occurred while loading AI_vs_AI_RandomForest_88_Samples.pkl: {str(e)}")
-        return  # This will exit the function
 
 
-    input_features = df['paragraph'].apply(extract_features_AI_vs_AI_RandomForest_88_Samples)
-    try:
-        predicted_llm = clf_loaded.predict(input_features)
-        st.write(f"Predicted LLM: {predicted_llm[0]}")
-        predicted_proba = clf_loaded.predict_proba(input_features)
-    except Exception as e:
-        st.write(f"An error occurred: {str(e)}")
+
+    # input_features = df['paragraph'].apply(extract_features_AI_vs_AI_RandomForest_88_Samples)
+    # try:
+    #     predicted_llm = clf_loaded.predict(input_features)
+    #     st.write(f"Predicted LLM: {predicted_llm[0]}")
+    #     predicted_proba = clf_loaded.predict_proba(input_features)
+    # except Exception as e:
+    #     st.write(f"An error occurred: {str(e)}")
 
     # labels = clf_loaded.classes_
 
@@ -299,20 +277,54 @@ def AI_vs_AI_Ridge_2000_Samples(df):
     return
 
 
+
+# Check if the file exists
+if not os.path.isfile('AI_vs_AI_RandomForest_88_Samples.pkl'):
+# Download the zip file if it doesn't exist
+    url = 'https://jaifar.net/AI_vs_AI_RandomForest_88_Samples.pkl'
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+    }
+
+    response = requests.get(url, headers=headers)
+
+    # Save the file
+    try:
+        with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file:
+            file.write(response.content)
+    except Exception as e:
+        st.write(f"An error occurred while writing AI_vs_AI_RandomForest_88_Samples.pkl: {str(e)}") 
+
+try:
+    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'rb') as file:
+        clf_loaded = pickle.load(file)
+except Exception as e:
+    st.write(f"An error occurred while loading AI_vs_AI_RandomForest_88_Samples.pkl: {str(e)}")
+    return  # This will exit the function
+
 # Creates a button
 press_me_button = st.button("Which Model Used?")
 
 if press_me_button:
+
+    input_features = df['paragraph'].apply(extract_features_AI_vs_AI_RandomForest_88_Samples)
     
-    # Use the selected option to control the flow of your application
-    if selected_option == "AI vs AI - RandomForest - 88 Samples":
-        AI_vs_AI_RandomForest_88_Samples(df)
+    try:
+        predicted_llm = clf_loaded.predict(input_features)
+        st.write(f"Predicted LLM: {predicted_llm[0]}")
+        predicted_proba = clf_loaded.predict_proba(input_features)
+    except Exception as e:
+        st.write(f"An error occurred: {str(e)}")
 
-    elif selected_option == "AI vs AI - Ridge - 2000 Samples":
-        AI_vs_AI_Ridge_2000_Samples(df)
+    # # Use the selected option to control the flow of your application
+    # if selected_option == "AI vs AI - RandomForest - 88 Samples":
+    #     AI_vs_AI_RandomForest_88_Samples(df)
 
-    elif selected_option == "AI vs Human":
-        st.write("You selected AI vs Human!")
+    # elif selected_option == "AI vs AI - Ridge - 2000 Samples":
+    #     AI_vs_AI_Ridge_2000_Samples(df)
+
+    # elif selected_option == "AI vs Human":
+    #     st.write("You selected AI vs Human!")
 
 
 
