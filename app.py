@@ -232,7 +232,7 @@ def AI_vs_AI_RandomForest_88_Samples(df):
         # Save the file
         try:
             with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file:
-            file.write(response.content)
+                file.write(response.content)
         except Exception as e:
             st.write(f"An error occurred: {str(e)}") 
 
