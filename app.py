@@ -30,9 +30,9 @@ nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
 
 # Check if the file exists
-if not os.path.isfile('AI_vs_AI_RandomForest_88_Samples.pkl'):
+if not os.path.isfile('RandomForestClassifier.pkl'):
     # Download the zip file if it doesn't exist
-    url = 'https://jaifar.net/AI_vs_AI_RandomForest_88_Samples.pkl'
+    url = 'https://jaifar.net/RandomForestClassifier.pkl'
     headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
     }
@@ -40,11 +40,11 @@ if not os.path.isfile('AI_vs_AI_RandomForest_88_Samples.pkl'):
     response = requests.get(url, headers=headers)
 
     # Save the file
-    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file:
+    with open('RandomForestClassifier.pkl', 'wb') as file:
         file.write(response.content)
 
 # At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
-with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'rb') as file:
+with open('RandomForestClassifier.pkl', 'rb') as file:
     clf_loaded = pickle.load(file)
 
 input_paragraph = st.text_area("Input your text here")
@@ -429,9 +429,9 @@ if press_me_button:
 
 
 # # Check if the file exists
-# if not os.path.isfile('AI_vs_AI_RandomForest_88_Samples.pkl'):
+# if not os.path.isfile('RandomForestClassifier.pkl'):
 # # Download the zip file if it doesn't exist
-#     url = 'https://jaifar.net/AI_vs_AI_RandomForest_88_Samples.pkl'
+#     url = 'https://jaifar.net/RandomForestClassifier.pkl'
 #     headers = {
 #         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
 #     }
@@ -440,16 +440,16 @@ if press_me_button:
 
 #     # Save the file
 #     try:
-#         with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file:
+#         with open('RandomForestClassifier.pkl', 'wb') as file:
 #             file.write(response.content)
 #     except Exception as e:
-#         st.write(f"An error occurred while writing AI_vs_AI_RandomForest_88_Samples.pkl: {str(e)}") 
+#         st.write(f"An error occurred while writing RandomForestClassifier.pkl: {str(e)}") 
 
 # try:
-#     with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'rb') as file:
+#     with open('RandomForestClassifier.pkl', 'rb') as file:
 #         clf_loaded = pickle.load(file)
 # except Exception as e:
-#     st.write(f"An error occurred while loading AI_vs_AI_RandomForest_88_Samples.pkl: {str(e)}")
+#     st.write(f"An error occurred while loading RandomForestClassifier.pkl: {str(e)}")
 
 # # Creates a button
 # press_me_button = st.button("Which Model Used?")
