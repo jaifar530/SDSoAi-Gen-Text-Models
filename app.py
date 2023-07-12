@@ -222,7 +222,7 @@ def AI_vs_AI_RandomForest_88_Samples(df):
 
 
 
-    # input_features = df['paragraph'].apply(extract_features_AI_vs_AI_RandomForest_88_Samples)
+    input_features = df['paragraph'].apply(extract_features_AI_vs_AI_RandomForest_88_Samples)
     # try:
     #     predicted_llm = clf_loaded.predict(input_features)
     #     st.write(f"Predicted LLM: {predicted_llm[0]}")
@@ -251,7 +251,8 @@ def AI_vs_AI_RandomForest_88_Samples(df):
     # for llm, prob in prob_dict.items():
     #     st.write(llm + ': ' + prob)
     #     st.progress(float(prob.strip('%'))/100)
-    # return 
+    return 
+
 
 def AI_vs_AI_Ridge_2000_Samples(df):
 
