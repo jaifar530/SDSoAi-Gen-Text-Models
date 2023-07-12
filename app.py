@@ -46,19 +46,7 @@ options = ["AI vs AI - RandomForest - 88 Samples", "AI vs AI - Ridge - 2000 Samp
 selected_option = st.selectbox('Select an Option', options)
 
 
-# Check if the file exists
-if not os.path.isfile('AI_vs_AI_RandomForest_88_Samples.pkl'):
-    # Download the zip file if it doesn't exist
-    url = 'https://jaifar.net/AI_vs_AI_RandomForest_88_Samples.pkl'
-    headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
-    }
 
-    response = requests.get(url, headers=headers)
-
-    # Save the file
-    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file1:
-        file1.write(response.content)
 
 
 # Check if the file exists
@@ -209,6 +197,20 @@ def add_vectorized_features(df):
 # Function define AI_vs_AI_RandomForest_88_Samples
 def AI_vs_AI_RandomForest_88_Samples(df):
     
+    # Check if the file exists
+    if not os.path.isfile('AI_vs_AI_RandomForest_88_Samples.pkl'):
+    # Download the zip file if it doesn't exist
+        url = 'https://jaifar.net/AI_vs_AI_RandomForest_88_Samples.pkl'
+        headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+        }
+
+    response = requests.get(url, headers=headers)
+
+    # Save the file
+    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file1:
+        file1.write(response.content)
+
     # At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
     with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'rb') as file1:
         clf_loaded = pickle.load(file1)
