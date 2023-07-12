@@ -245,28 +245,28 @@ def AI_vs_AI_RandomForest_88_Samples(df):
     except Exception as e:
         st.write(f"An error occurred: {str(e)}")
 
-    labels = clf_loaded.classes_
+    # labels = clf_loaded.classes_
 
-    # Create a mapping from old labels to new labels
-    label_mapping = {1: 'gpt3', 2: 'gpt4', 3: 'googlebard', 4: 'huggingface'}
+    # # Create a mapping from old labels to new labels
+    # label_mapping = {1: 'gpt3', 2: 'gpt4', 3: 'googlebard', 4: 'huggingface'}
 
-    # Apply the mapping to the labels
-    new_labels = [label_mapping[label] for label in labels]
+    # # Apply the mapping to the labels
+    # new_labels = [label_mapping[label] for label in labels]
 
-    # Create a dictionary that maps new labels to probabilities
-    prob_dict = {k: v for k, v in zip(new_labels, probabilities)}
+    # # Create a dictionary that maps new labels to probabilities
+    # prob_dict = {k: v for k, v in zip(new_labels, probabilities)}
 
-    # Convert probabilities to percentages and sort the dictionary in descending order
-    prob_dict = {k: f'{v*100:.2f}%' for k, v in sorted(prob_dict.items(), key=lambda item: item[1], reverse=True)}
+    # # Convert probabilities to percentages and sort the dictionary in descending order
+    # prob_dict = {k: f'{v*100:.2f}%' for k, v in sorted(prob_dict.items(), key=lambda item: item[1], reverse=True)}
 
-    # Print the dictionary
-    #st.write(prob_dict)
+    # # Print the dictionary
+    # #st.write(prob_dict)
 
-    # Create a progress bar and a bar chart for each LLM
-    for llm, prob in prob_dict.items():
-        st.write(llm + ': ' + prob)
-        st.progress(float(prob.strip('%'))/100)
-    return 
+    # # Create a progress bar and a bar chart for each LLM
+    # for llm, prob in prob_dict.items():
+    #     st.write(llm + ': ' + prob)
+    #     st.progress(float(prob.strip('%'))/100)
+    # return 
 
 def AI_vs_AI_Ridge_2000_Samples(df):
 
