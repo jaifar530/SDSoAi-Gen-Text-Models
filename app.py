@@ -234,13 +234,13 @@ def AI_vs_AI_RandomForest_88_Samples(df):
             with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file:
                 file.write(response.content)
         except Exception as e:
-            st.write(f"An error occurred: {str(e)}") 
+            st.write(f"An error occurred while writing AI_vs_AI_RandomForest_88_Samples.pkl: {str(e)}") 
 
     try:
         with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'rb') as file:
             clf_loaded = pickle.load(file)
     except Exception as e:
-        st.write(f"An error occurred: {str(e)}")
+        st.write(f"An error occurred while loading AI_vs_AI_RandomForest_88_Samples.pkl: {str(e)}")
         return  # This will exit the function
 
 
