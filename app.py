@@ -44,7 +44,7 @@ if not os.path.isfile('AI_vs_AI_RandomForest_88_Samples.pkl'):
         file.write(response.content)
 
 # At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
-with open('RandomForestClassifier.pkl', 'rb') as file:
+with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'rb') as file:
     clf_loaded = pickle.load(file)
 
 input_paragraph = st.text_area("Input your text here")
