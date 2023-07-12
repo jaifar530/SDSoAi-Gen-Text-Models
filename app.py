@@ -30,9 +30,9 @@ nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
 
 # Check if the file exists
-if not os.path.isfile('RandomForestClassifier.pkl'):
+if not os.path.isfile('AI_vs_AI_RandomForest_88_Samples.pkl'):
     # Download the zip file if it doesn't exist
-    url = 'https://jaifar.net/RandomForestClassifier.pkl'
+    url = 'https://jaifar.net/AI_vs_AI_RandomForest_88_Samples.pkl'
     headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
     }
@@ -40,13 +40,12 @@ if not os.path.isfile('RandomForestClassifier.pkl'):
     response = requests.get(url, headers=headers)
 
     # Save the file
-    with open('RandomForestClassifier.pkl', 'wb') as file:
+    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file:
         file.write(response.content)
 
 # At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
 with open('RandomForestClassifier.pkl', 'rb') as file:
     clf_loaded = pickle.load(file)
-
 
 input_paragraph = st.text_area("Input your text here")
 words_counts = word_tokenize(input_paragraph)
