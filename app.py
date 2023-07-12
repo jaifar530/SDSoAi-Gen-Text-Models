@@ -23,7 +23,7 @@ nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
 
 #version
-st.markdown("v1.88")
+st.markdown("v1.888")
 
 
 # URL of the text file
@@ -246,7 +246,7 @@ def AI_vs_AI_RandomForest_88_Samples(df):
         predicted_proba = clf_loaded.predict_proba(input_features)
     except Exception as e:
         st.write(f"An error occurred: {str(e)}")
-        
+
     labels = clf_loaded.classes_
 
     # Create a mapping from old labels to new labels
