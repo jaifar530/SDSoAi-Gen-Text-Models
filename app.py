@@ -23,8 +23,30 @@ nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
 
 #version
-st.markdown("v1.4")
-           
+st.markdown("v1.5")
+
+
+# URL of the text file
+url = 'https://jaifar.net/text.txt'
+
+headers = {
+'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+}
+
+response = requests.get(url, headers=headers)
+
+# Check if the request was successful
+if response.status_code == 200:
+    # Read the content of the file
+    content = response.text
+
+    # Print the content of the file
+    # print(content)
+else:
+    # Handle the case when the request fails
+    print('Failed to download the file.')
+
+
 
 #title 
 st.title("Smart Detection System of AI-Generated Text Models")
@@ -33,7 +55,7 @@ st.title("Smart Detection System of AI-Generated Text Models")
 st.markdown("This is a POC for Smart Detection System of AI Generated Text Models project (:blue[MSc Data Analytics]), it is a pre-trained model that detect the probablities of using any of the known LLM (chatgpt3, chatgpt4, GoogleBard, HuggingfaceChat)")
 
 #input text 
-input_paragraph = st.text_area("Input your text here")
+input_paragraph = st.text_area("Input your text here", value=content)
 words_counts = word_tokenize(input_paragraph)
 final_words = len(words_counts)
 st.write('Words counts: ', final_words)
@@ -208,12 +230,12 @@ def AI_vs_AI_RandomForest_88_Samples(df):
         response = requests.get(url, headers=headers)
 
     # Save the file
-    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file1:
-        file1.write(response.content)
+    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'wb') as file:
+        file.write(response.content)
 
     # At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
-    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'rb') as file1:
-        clf_loaded = pickle.load(file1)
+    with open('AI_vs_AI_RandomForest_88_Samples.pkl', 'rb') as file:
+        clf_loaded = pickle.load(file)
     
     input_features = df['paragraph'].apply(extract_features_AI_vs_AI_RandomForest_88_Samples)
 
