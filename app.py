@@ -10,7 +10,7 @@ st.markdown("This is a POC for Smart Detection System of AI Generated Text Model
 
 import os
 import requests
-import pickle
+# import pickle
 import pandas as pd
 import nltk
 import spacy
@@ -47,7 +47,7 @@ if not os.path.isfile('RandomForestClassifier.joblib'):
 
 
 # Load the model from the file
-clf_loaded = load('RandomForestClassifier.joblib')
+# clf_loaded = load('RandomForestClassifier.joblib')
 
 # # At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
 # with open('RandomForestClassifier.pkl', 'rb') as file:
