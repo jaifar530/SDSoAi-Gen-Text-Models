@@ -6,3 +6,4 @@ spacy
 numpy
 scikit-learn
 joblib
+pickle
