@@ -1,7 +1,7 @@
 
 import streamlit as st
 #subtitle 
-st.markdown("version: 1.0")
+st.markdown("version: 1.2")
 #title 
 st.title("Smart Detection System of AI-Generated Text Models")
 
