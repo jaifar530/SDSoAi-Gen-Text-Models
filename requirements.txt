@@ -5,3 +5,4 @@ nltk
 spacy
 numpy
 scikit-learn
+joblib
