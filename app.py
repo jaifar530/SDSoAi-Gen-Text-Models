@@ -20,6 +20,7 @@ import numpy as np
 from nltk.stem import WordNetLemmatizer
 from nltk import ne_chunk, pos_tag, word_tokenize
 from nltk.tree import Tree
+from joblib import dump, load
 nltk.download('wordnet')
 nltk.download('maxent_ne_chunker')
 nltk.download('words')
@@ -30,22 +31,26 @@ nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
 
 # Check if the file exists
-if not os.path.isfile('RandomForestClassifier.pkl'):
-    # Download the zip file if it doesn't exist
-    url = 'https://jaifar.net/RandomForestClassifier.pkl'
+if not os.path.isfile('RandomForestClassifier.joblib'):
+
+    url = 'https://jaifar.net/RandomForestClassifier.joblib'
     headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
     }
 
     response = requests.get(url, headers=headers)
 
-    # Save the file
-    with open('RandomForestClassifier.pkl', 'wb') as file:
+
+    with open('RandomForestClassifier.joblib', 'wb') as file:
         file.write(response.content)
 
-# At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
-with open('RandomForestClassifier.pkl', 'rb') as file:
-    clf_loaded = pickle.load(file)
+
+# Load the model from the file
+clf_loaded = load('RandomForestClassifier.joblib')
+
+# # At this point, the pickle file should exist, either it was already there, or it has been downloaded and extracted.
+# with open('RandomForestClassifier.pkl', 'rb') as file:
+#     clf_loaded = pickle.load(file)
 
 input_paragraph = st.text_area("Input your text here")
 words_counts = word_tokenize(input_paragraph)
