@@ -121,7 +121,7 @@ if press_me_button:
     
     for author, prob in sorted_probabilities:
         st.write(f"{author}: {prob * 100:.2f}%")
-        st.progress(prob)
+        st.progress(float(prob.strip('%'))/100)
 
 
 
