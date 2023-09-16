@@ -149,7 +149,7 @@ with st.expander("How does the system work?"):
     """)
     
     # Fetch the image from the URL
-    accuracy_image_request = requests.get("https://jaifar.net/best_accuracy.png", headers=headers))
+    accuracy_image_request = requests.get("https://jaifar.net/best_accuracy.png", headers=headers)
     
     # Open the image
     accuracy_image = Image.open(accuracy_image_request.content)
