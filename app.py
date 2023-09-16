@@ -1,9 +1,8 @@
 import streamlit as st
 st.write("Test system if working")
-
+import zipfile
 import os
 import requests
-import subprocess  # Import the subprocess module
 from keras.models import load_model
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
@@ -40,21 +39,20 @@ if not os.path.exists('my_authorship_model'):
         if os.path.exists(zip_file_path):
             st.write("Zip file exists")
 
-            # # Debugging: List contents of the zip file using unzip
-            # subprocess.run(['unzip', '-l', zip_file_path])
-
-            # Extract the model using unzip
-            unzip_result = subprocess.run(['unzip', '-o', zip_file_path, '-d', 'my_authorship_model'])
-
-            # Debugging: Check unzip exit code (0 means success)
-            if unzip_result.returncode == 0:
-                st.write("Model folder successfully extracted using unzip")
+            # Extract the model using zipfile
+            with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+                zip_ref.extractall('my_authorship_model')
+                
+            # Debugging: Check if the folder is successfully created
+            if os.path.exists('my_authorship_model'):
+                st.write("Model folder successfully extracted using zipfile")
                 # Debugging: List the directory contents after extraction
                 st.write("Listing directory contents:")
                 st.write(os.listdir('.'))
             else:
-                st.write("Model folder was not extracted successfully using unzip")
+                st.write("Model folder was not extracted successfully using zipfile")
                 exit(1)
+
         else:
             st.write("Zip file does not exist")
             exit(1)
