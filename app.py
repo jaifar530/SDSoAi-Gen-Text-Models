@@ -144,7 +144,7 @@ with st.expander("Aim and Objectives"):
 # System Details
 with st.expander("How does the system work?"):
     st.write("""
-    The system is trained using a CNN model on a dataset of 140,546 paragraphs, varying in length from 10 to 500 words.
+    The system is trained using deep learning model on a dataset of 140,546 paragraphs, varying in length from 10 to 1090 words.
     It achieves an accuracy of 0.9964 with a validation loss of 0.094.
     """)
 
