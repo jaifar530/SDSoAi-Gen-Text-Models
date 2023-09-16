@@ -126,7 +126,7 @@ def predict_author(new_text, model, tokenizer, label_encoder):
 new_text = st.text_area("Input Your Text Here:")
 
 # Creates a button named 'Press me'
-press_me_button = st.button("Writer or Robot?")
+press_me_button = st.button("Human or Robot?")
 
 if press_me_button:
     predicted_author, author_probabilities = predict_author(new_text, loaded_model, tokenizer, label_encoder)
