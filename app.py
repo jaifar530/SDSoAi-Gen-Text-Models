@@ -113,10 +113,7 @@ press_me_button = st.button("Writer or Robot?")
 if press_me_button:
     predicted_author, author_probabilities = predict_author(new_text, loaded_model, tokenizer, label_encoder)
     sorted_probabilities = sorted(author_probabilities.items(), key=lambda x: x[1], reverse=True)
-
-    st.write(f"The text is most likely written by: {predicted_author}")
-    st.write("Probabilities for each author are (sorted):")
-    # Mapping the internal names to display names
+  
     author_map = {
         "googlebard": "Google Bard",
         "gpt3": "ChatGPT-3",
@@ -124,6 +121,12 @@ if press_me_button:
         "huggingface": "HuggingChat",
         "human": "Human-Written"
     }
+
+    predicted_author_diplay_name =  author_map.get(predicted_author, predicted_author)
+    st.write(f"The text is most likely written by: {predicted_author_diplay_name}")
+    st.write("Probabilities for each author are (sorted):")
+    # Mapping the internal names to display names
+
 
     for author, prob in sorted_probabilities:
         display_name = author_map.get(author, author)  # Retrieve the display name, fall back to original if not found
