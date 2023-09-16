@@ -147,12 +147,18 @@ with st.expander("How does the system work?"):
     The system is trained using a CNN model on a dataset of 140,546 paragraphs, varying in length from 10 to 500 words.
     It achieves an accuracy of 0.9964 with a validation loss of 0.094.
     """)
-    
+
     # Fetch the image from the URL
     accuracy_image_request = requests.get("https://jaifar.net/best_accuracy.png", headers=headers)
     
+    # Save the downloaded content
+    image_path = "best_accuracy.png"
+    with open(image_path, "wb") as f:
+        f.write(accuracy_image_request.content)
+
+    
     # Open the image
-    accuracy_image = Image.open(accuracy_image_request.content)
+    accuracy_image = Image.open(image_path)
     
     # Display the image using streamlit
     st.image(accuracy_image, caption='Best Accuracy', use_column_width=True)
