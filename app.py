@@ -116,10 +116,12 @@ if press_me_button:
 
     st.write(f"The text is most likely written by: {predicted_author}")
     st.write("Probabilities for each author are (sorted):")
+    # for author, prob in sorted_probabilities:
+    # st.write(f"{author}: {prob * 100:.2f}%")
+    
     for author, prob in sorted_probabilities:
         st.write(f"{author}: {prob * 100:.2f}%")
-
-import streamlit as st
+        st.progress(prob)
 
 
 
