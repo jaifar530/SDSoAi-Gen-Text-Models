@@ -40,8 +40,8 @@ if not os.path.exists('my_authorship_model'):
         if os.path.exists(zip_file_path):
             st.write("Zip file exists")
 
-            # Debugging: List contents of the zip file using unzip
-            subprocess.run(['unzip', '-l', zip_file_path])
+            # # Debugging: List contents of the zip file using unzip
+            # subprocess.run(['unzip', '-l', zip_file_path])
 
             # Extract the model using unzip
             unzip_result = subprocess.run(['unzip', '-o', zip_file_path, '-d', 'my_authorship_model'])
