@@ -16,6 +16,24 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
 }
 
+#################### Load the banner image ##########
+# Fetch the image from the URL
+banner_image_request = requests.get("https://jaifar.net/ADS/banner.jpg", headers=headers)
+
+# Save the downloaded content
+banner_image_path = "banner.jpg"
+with open(banner_image_path, "wb") as f:
+    f.write(banner_image_request.content)
+
+
+# Open the image
+banner_image = Image.open(banner_image_path)
+
+# Display the image using streamlit
+st.image(banner_image, caption='', use_column_width=True)
+
+################ end loading banner image ##################
+
 
 
 # Check if the model folder exists
