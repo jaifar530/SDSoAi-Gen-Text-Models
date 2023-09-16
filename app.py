@@ -116,16 +116,19 @@ if press_me_button:
 
     st.write(f"The text is most likely written by: {predicted_author}")
     st.write("Probabilities for each author are (sorted):")
-    # for author, prob in sorted_probabilities:
-    # st.write(f"{author}: {prob * 100:.2f}%")
-    
+    # Mapping the internal names to display names
+    author_map = {
+        "googlebard": "Google Bard",
+        "gpt3": "ChatGPT-3",
+        "gpt4": "ChatGPT-4",
+        "huggingface": "HuggingChat",
+        "human": "Human-Written"
+    }
+
     for author, prob in sorted_probabilities:
-        st.write(f"{author}: {prob * 100:.2f}%")
+        display_name = author_map.get(author, author)  # Retrieve the display name, fall back to original if not found
+        st.write(f"{display_name}: {prob * 100:.2f}%")
         st.progress(float(prob))
-
-
-
-
 
 # Using expander to make FAQ sections
 st.subheader("Frequently Asked Questions (FAQ)")
