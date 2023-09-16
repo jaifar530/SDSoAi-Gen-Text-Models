@@ -1,8 +1,7 @@
-nltk
+tensorflow
 requests
-pandas
-nltk
-spacy
+pandas==1.5.3
 numpy
-scikit-learn
-joblib
+scikit-learn==1.2.2
+keras
+nltk
