@@ -31,22 +31,22 @@ if not os.path.exists('my_authorship_model'):
         st.write(f"Downloaded model size: {len(r.content)} bytes")
 
         # Save the downloaded content
-        with open(zip_file_path, "wb") as f:
+with open(zip_file_path, "wb") as f:
             f.write(r.content)
 
-        # Debugging: Verify that the zip file exists
+Debugging: Verify that the zip file exists
         if os.path.exists(zip_file_path):
             st.write("Zip file exists")
 
-            # Debugging: List contents of the zip file using unzip
+Debugging: List contents of the zip file using unzip
             subprocess.run(['unzip', '-l', zip_file_path])
 
             # Extract the model using unzip
-            unzip_result = subprocess.run(['unzip', '-o', zip_file_path, '-d', 'my_authorship_model'])
+            unzip_result = subprocess.run(['unzip', '-o', zip_file_path, '-d','my_authorship_model'])
 
             # Debugging: Check unzip exit code (0 means success)
             if unzip_result.returncode == 0:
-                st.write("Model folder successfully extracted using unzip")
+st.write (Model folder successfully extracted using unzip")
                 # Debugging: List the directory contents after extraction
                 st.write("Listing directory contents:")
                 st.write(os.listdir('.'))
@@ -57,43 +57,43 @@ if not os.path.exists('my_authorship_model'):
         else:
             st.write("Zip file does not exist")
             exit(1)
-    except Exception as e:
+except Exception as e:
         st.write(f"Failed to download or extract the model: {e}")
         exit(1)
 else:
     st.write("Model folder exists")
 
-# Debugging: Print current working directory after extraction
+Debugging: Print current working directory after extraction
 st.write(f"Current Working Directory After Extraction: {os.getcwd()}")
 
 
-# Debugging: Check if model folder contains required files
+Debugging: Check if model folder contains required files
 try:
     model_files = os.listdir('my_authorship_model')
     st.write(f"Files in model folder: {model_files}")
 except Exception as e:
-    st.write(f"Could not list files in model folder: {e}")
+st.write(f Could not list files in model folder: {e}")
 
-# Download required files
+Download the required files
 file_urls = {
     'tokenizer.pkl': 'https://jaifar.net/ADS/tokenizer.pkl',
     'label_encoder.pkl': 'https://jaifar.net/ADS/label_encoder.pkl'
 }
 
-for filename, url in file_urls.items():
+for filename and url in file_urls.items():
     try:
         r = requests.get(url, headers=headers)
         r.raise_for_status()
-        with open(filename, 'wb') as f:
+with open(filename, 'wb') as f:
             f.write(r.content)
-    except Exception as e:
+except Exception as e:
         st.write(f"Failed to download {filename}: {e}")
         exit(1)
 
-# Load the saved model
+Load the saved model
 loaded_model = load_model("my_authorship_model")
 
-# Load the saved tokenizer and label encoder
+Load the saved tokenizer and label encoder
 with open('tokenizer.pkl', 'rb') as handle:
     tokenizer = pickle.load(handle)
 
@@ -109,7 +109,6 @@ def predict_author(new_text, model, tokenizer, label_encoder):
     prediction = model.predict(padded_sequence)
     
     predicted_label = label_encoder.inverse_transform([prediction.argmax()])[0]
-    
     probabilities = prediction[0]
     author_probabilities = {}
     for idx, prob in enumerate(probabilities):
@@ -124,10 +123,14 @@ new_text = st.text_area("Input your text here")
 #final_words = len(words_counts)
 #st.write('Words counts: ', final_words)
 
-predicted_author, author_probabilities = predict_author(new_text, loaded_model, tokenizer, label_encoder)
-sorted_probabilities = sorted(author_probabilities.items(), key=lambda x: x[1], reverse=True)
+# Creates a button named 'Press me'
+press_me_button = st.button("Which Model Used?")
 
-st.write(f"The text is most likely written by: {predicted_author}")
-st.write("Probabilities for each author are (sorted):")
-for author, prob in sorted_probabilities:
-    st.write(f"{author}: {prob * 100:.2f}%")
+if press_me_button:
+    predicted_author, author_probabilities = predict_author(new_text, loaded_model, tokenizer, label_encoder)
+    sorted_probabilities = sorted(author_probabilities.items(), key=lambda x: x[1], reverse=True)
+    
+    st.write(f"The text is most likely written by: {predicted_author}")
+    st.write("Probabilities for each author are (sorted):")
+    for author, prob in sorted_probabilities:
+        st.write(f"{author}: {prob * 100:.2f}%")
