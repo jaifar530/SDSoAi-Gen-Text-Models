@@ -10,10 +10,8 @@ from sklearn.preprocessing import LabelEncoder
 import pickle
 import numpy as np
 from PIL import Image
-import joblib
 from joblib import load
 
-st.write(f"joblib version: {joblib.__version__}")
 
 # Custom headers for the HTTP request
 headers = {
@@ -276,32 +274,20 @@ if press_me_button:
         file_prefix = 'not_trancated_full_paragraph.xlsx'
     
     # Load the models and vectorizer
-    #ridge_model = load_model(f"{file_prefix}_ridge_model.pkl")
-    
-    try:
-        ridge_model = load(f"{file_prefix}_ridge_model.pkl")
-    except Exception as e:
-        st.write(f"Error loading the ridge model: {e}")
-    exit(1)
-
-    # extra_trees_model = load_model(f"{file_prefix}_extra_trees_model.pkl")
-    try:
-        extra_trees_model = load(f"{file_prefix}_extra_trees.pkl")
-    except Exception as e:
-        st.write(f"Error loading the extra_trees: {e}")
-    exit(1)
-        
-    # vectorizer = load_model(f"{file_prefix}_vectorizer.pkl")
-
-    try:
-        with open(f"{file_prefix}_vectorizer.pkl", 'rb') as f:
-            vectorizer = pickle.load(f)
-    except Exception as e:
-        st.write(f"Error loading the vectorizer: {e}")
-    exit(1)
-
+    ridge_model = load_model(f"{file_prefix}_ridge_model.pkl")
+    extra_trees_model = load_model(f"{file_prefix}_extra_trees_model.pkl")
+    vectorizer = load_model(f"{file_prefix}_vectorizer.pkl")
     # Transform the input
-    user_input_transformed = vectorizer.transform([new_text])
+    user_input_transformed = vectorizer.transform(new_text)
+
+    # Load the saved models and vectorizer
+
+    # loaded_ridge_classifier = joblib.load(f'{excel_file_to_use}_ridge_model.pkl')
+    # loaded_extra_trees_classifier = joblib.load(f'{excel_file_to_use}_extra_trees_model.pkl')
+    # loaded_vectorizer = joblib.load(f'{excel_file_to_use}_vectorizer.pkl')
+
+    # user_input_vectorized = loaded_vectorizer.transform(user_input)
+
     
     # Make predictions
     ridge_prediction = ridge_model.predict(user_input_transformed)
