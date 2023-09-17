@@ -12,7 +12,7 @@ import numpy as np
 from PIL import Image
 from joblib import load
 
-st.write(f"Pickle version: {pickle.format_version}")
+st.write(f"joblib version: {joblib.__version__}")
 
 # Custom headers for the HTTP request
 headers = {
