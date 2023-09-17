@@ -35,7 +35,7 @@ st.image(banner_image, caption='', use_column_width=True)
 ################ end loading banner image ##################
 
 
-
+############# Download Or Check Files/folders exeistince ##############
 # Check if the model folder exists
 zip_file_path = "my_authorship_model_zip.zip"
 if not os.path.exists('my_authorship_model'):
@@ -76,8 +76,8 @@ if not os.path.exists('my_authorship_model'):
     except Exception as e:
         st.write(f"Failed to download or extract the model: {e}")
         exit(1)
-# else:
-#     st.write("System Ready !!")
+else:
+     st.write("Version: 2.1")
 
 
 # Download the required files
@@ -87,15 +87,19 @@ file_urls = {
 }
 
 for filename, url in file_urls.items():
-    try:
-        r = requests.get(url, headers=headers)
-        r.raise_for_status()
-        with open(filename, 'wb') as f:
-            f.write(r.content)
-    except Exception as e:
-        st.write(f"Failed to download {filename}: {e}")
-        exit(1)
+    if not os.path.exists(filename):  # Check if the file doesn't exist
+        try:
+            r = requests.get(url, headers=headers)
+            r.raise_for_status()
+            with open(filename, 'wb') as f:
+                f.write(r.content)
+        except Exception as e:
+            st.write(f"Failed to download {filename}: {e}")
+            exit(1)
+    else:
+        st.write(f"File {filename} already exists. Skipping download.")
 
+############### Load CNN Model ############
 # Load the saved model
 loaded_model = load_model("my_authorship_model")
 
@@ -107,6 +111,8 @@ with open('label_encoder.pkl', 'rb') as handle:
     label_encoder = pickle.load(handle)
 
 max_length = 300  # As defined in the training code
+
+############### End Load CNN Model ############
 
 # Function to predict author for new text
 def predict_author(new_text, model, tokenizer, label_encoder):
