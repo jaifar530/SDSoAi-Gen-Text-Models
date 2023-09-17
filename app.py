@@ -10,6 +10,7 @@ from sklearn.preprocessing import LabelEncoder
 import pickle
 import numpy as np
 from PIL import Image
+import joblib
 from joblib import load
 
 st.write(f"joblib version: {joblib.__version__}")
