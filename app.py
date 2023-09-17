@@ -97,8 +97,8 @@ for filename, url in file_urls.items():
         except Exception as e:
             st.write(f"Failed to download {filename}: {e}")
             exit(1)
-    else:
-        st.write(f"File {filename} already exists. Skipping download.")
+    # else:
+    #     st.write(f"File {filename} already exists. Skipping download.")
 ############ download ridge and ExtraTree stuff
 
 file_names = [
