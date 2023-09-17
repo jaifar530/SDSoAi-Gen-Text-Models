@@ -102,12 +102,12 @@ for filename, url in file_urls.items():
     #     st.write(f"File {filename} already exists. Skipping download.")
 ############ download ridge and ExtraTree stuff
 
-def has_internet_connection():
-    try:
-        response = requests.get("https://www.google.com/", timeout=5)
-        return True
-    except requests.ConnectionError:
-        return False
+# def has_internet_connection():
+#     try:
+#         response = requests.get("https://www.google.com/", timeout=5)
+#         return True
+#     except requests.ConnectionError:
+#         return False
 
 def is_zip_file(file_path):
     return zipfile.is_zipfile(file_path)
