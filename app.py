@@ -163,12 +163,12 @@ def check_and_download_files():
             missing_files.append(file_name)
 
     if missing_files:
-        print("The following files are missing:")
+        st.write("The following files are missing:")
         for file_name in missing_files:
-            print(file_name)
+            st.write(file_name)
         
         if not has_internet_connection():
-            print("No internet connection. Cannot download missing files.")
+            st.write("No internet connection. Cannot download missing files.")
             return
         
         try:
@@ -183,7 +183,7 @@ def check_and_download_files():
                 zip_file.write(response.content)
 
             if not is_zip_file('content.zip'):
-                print("Downloaded content is not a ZIP file.")
+                st.write("Downloaded content is not a ZIP file.")
                 return
 
             with zipfile.ZipFile('content.zip', 'r') as zip_ref:
@@ -191,14 +191,14 @@ def check_and_download_files():
 
             extracted_files = os.listdir()
             if not are_files_extracted(extracted_files, missing_files):
-                print("Not all missing files were extracted.")
+                st.write("Not all missing files were extracted.")
                 return
             
-            print("content.zip downloaded and extracted successfully.")
+            st.write("content.zip downloaded and extracted successfully.")
         except Exception as e:
-            print(f"Error downloading or extracting content.zip: {e}")
+            st.write(f"Error downloading or extracting content.zip: {e}")
     else:
-        print("All files exist.")
+        st.write("All files exist.")
 
 check_and_download_files()
 
