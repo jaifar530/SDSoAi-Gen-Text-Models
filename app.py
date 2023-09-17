@@ -249,29 +249,29 @@ if press_me_button:
 
     # Choose the appropriate model based on word count
     if 10 <= word_count <= 34:
-        file_prefix = 'truncated_10_to_34'
+        file_prefix = 'truncated_10_to_34.xlsx'
     elif 35 <= word_count <= 59:
-        file_prefix = 'truncated_35_to_59'
+        file_prefix = 'truncated_35_to_59.xlsx'
     elif 60 <= word_count <= 84:
-        file_prefix = 'truncated_60_to_84'
+        file_prefix = 'truncated_60_to_84.xlsx'
     elif 85 <= word_count <= 109:
-        file_prefix = 'truncated_85_to_109'
+        file_prefix = 'truncated_85_to_109.xlsx'
     elif 110 <= word_count <= 134:
-        file_prefix = 'truncated_110_to_134'
+        file_prefix = 'truncated_110_to_134.xlsx'
     elif 135 <= word_count <= 159:
-        file_prefix = 'truncated_135_to_159'
+        file_prefix = 'truncated_135_to_159.xlsx'
     elif 160 <= word_count <= 184:
-        file_prefix = 'truncated_160_to_184'
+        file_prefix = 'truncated_160_to_184.xlsx'
     elif 185 <= word_count <= 209:
-        file_prefix = 'truncated_185_to_209'
+        file_prefix = 'truncated_185_to_209.xlsx'
     elif 210 <= word_count <= 234:
-        file_prefix = 'truncated_210_to_234'
+        file_prefix = 'truncated_210_to_234.xlsx'
     elif 235 <= word_count <= 259:
-        file_prefix = 'truncated_235_to_259'
+        file_prefix = 'truncated_235_to_259.xlsx'
     elif 260 <= word_count <= 284:
-        file_prefix = 'truncated_260_to_284'
+        file_prefix = 'truncated_260_to_284.xlsx'
     else:
-        file_prefix = 'not_trancated_full_paragraph'
+        file_prefix = 'not_trancated_full_paragraph.xlsx'
     
     # Load the models and vectorizer
     ridge_model = load_model(f"{file_prefix}_ridge_model.pkl")
