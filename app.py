@@ -9,6 +9,7 @@ from sklearn.preprocessing import LabelEncoder
 import pickle
 import numpy as np
 from PIL import Image
+from file_checker import check_and_download_files
 
 
 # Custom headers for the HTTP request
@@ -98,6 +99,9 @@ for filename, url in file_urls.items():
             exit(1)
     else:
         st.write(f"File {filename} already exists. Skipping download.")
+############ download ridge and ExtraTree stuff
+
+check_and_download_files
 
 ############### Load CNN Model ############
 # Load the saved model
