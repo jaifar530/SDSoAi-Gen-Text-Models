@@ -293,8 +293,8 @@ if press_me_button:
     # vectorizer = load_model(f"{file_prefix}_vectorizer.pkl")
 
     try:
-    with open(f"{file_prefix}_vectorizer.pkl", 'rb') as f:
-        vectorizer = pickle.load(f)
+        with open(f"{file_prefix}_vectorizer.pkl", 'rb') as f:
+            vectorizer = pickle.load(f)
     except Exception as e:
         st.write(f"Error loading the vectorizer: {e}")
     exit(1)
