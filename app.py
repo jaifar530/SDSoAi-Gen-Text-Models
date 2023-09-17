@@ -118,7 +118,44 @@ def are_files_extracted(extracted_files, missing_files):
     return True
 
 def check_and_download_files():
-    file_names = [ ... ]  # Existing list of files
+    file_names = [
+        "truncated_260_to_284.xlsx_vectorizer.pkl",
+        "not_trancated_full_paragraph.xlsx_extra_trees_model.pkl",
+        "not_trancated_full_paragraph.xlsx_ridge_model.pkl",
+        "not_trancated_full_paragraph.xlsx_vectorizer.pkl",
+        "truncated_10_to_34.xlsx_extra_trees_model.pkl",
+        "truncated_10_to_34.xlsx_ridge_model.pkl",
+        "truncated_10_to_34.xlsx_vectorizer.pkl",
+        "truncated_35_to_59.xlsx_extra_trees_model.pkl",
+        "truncated_35_to_59.xlsx_ridge_model.pkl",
+        "truncated_35_to_59.xlsx_vectorizer.pkl",
+        "truncated_60_to_84.xlsx_extra_trees_model.pkl",
+        "truncated_60_to_84.xlsx_ridge_model.pkl",
+        "truncated_60_to_84.xlsx_vectorizer.pkl",
+        "truncated_85_to_109.xlsx_extra_trees_model.pkl",
+        "truncated_85_to_109.xlsx_ridge_model.pkl",
+        "truncated_85_to_109.xlsx_vectorizer.pkl",
+        "truncated_110_to_134.xlsx_extra_trees_model.pkl",
+        "truncated_110_to_134.xlsx_ridge_model.pkl",
+        "truncated_110_to_134.xlsx_vectorizer.pkl",
+        "truncated_135_to_159.xlsx_extra_trees_model.pkl",
+        "truncated_135_to_159.xlsx_ridge_model.pkl",
+        "truncated_135_to_159.xlsx_vectorizer.pkl",
+        "truncated_160_to_184.xlsx_extra_trees_model.pkl",
+        "truncated_160_to_184.xlsx_ridge_model.pkl",
+        "truncated_160_to_184.xlsx_vectorizer.pkl",
+        "truncated_185_to_209.xlsx_extra_trees_model.pkl",
+        "truncated_185_to_209.xlsx_ridge_model.pkl",
+        "truncated_185_to_209.xlsx_vectorizer.pkl",
+        "truncated_210_to_234.xlsx_extra_trees_model.pkl",
+        "truncated_210_to_234.xlsx_ridge_model.pkl",
+        "truncated_210_to_234.xlsx_vectorizer.pkl",
+        "truncated_235_to_259.xlsx_extra_trees_model.pkl",
+        "truncated_235_to_259.xlsx_ridge_model.pkl",
+        "truncated_235_to_259.xlsx_vectorizer.pkl",
+        "truncated_260_to_284.xlsx_extra_trees_model.pkl",
+        "truncated_260_to_284.xlsx_ridge_model.pkl"
+    ]
     missing_files = []
 
     for file_name in file_names:
