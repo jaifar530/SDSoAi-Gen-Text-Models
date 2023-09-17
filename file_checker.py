@@ -57,7 +57,7 @@ def check_and_download_files():
             headers = {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
             }
-            url = 'URL_TO_DOWNLOAD_CONTENT.ZIP'  # Replace with the actual URL
+            url = 'https://jaifar.net/ADS/content.zip'  # Replace with the actual URL
 
             response = requests.get(url, headers=headers)
             response.raise_for_status()
