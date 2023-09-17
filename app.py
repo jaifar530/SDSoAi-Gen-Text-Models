@@ -168,9 +168,9 @@ def check_and_download_files():
         for file_name in missing_files:
             st.write(file_name)
         
-        if not has_internet_connection():
-            st.write("No internet connection. Cannot download missing files.")
-            return
+        # if not has_internet_connection():
+        #     st.write("No internet connection. Cannot download missing files.")
+        #     return
         
         try:
             headers = {
