@@ -274,9 +274,9 @@ if press_me_button:
         file_prefix = 'not_trancated_full_paragraph.xlsx'
     
     # Load the models and vectorizer
-    ridge_model = load_model(f"{file_prefix}_ridge_model.pkl")
-    extra_trees_model = load_model(f"{file_prefix}_extra_trees_model.pkl")
-    vectorizer = load_model(f"{file_prefix}_vectorizer.pkl")
+    ridge_model = pickle.load(f"{file_prefix}_ridge_model.pkl")
+    extra_trees_model = pickle.load(f"{file_prefix}_extra_trees_model.pkl")
+    vectorizer = pickle.load(f"{file_prefix}_vectorizer.pkl")
     # Transform the input
     user_input_transformed = vectorizer.transform(new_text)
 
