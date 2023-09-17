@@ -280,14 +280,14 @@ if press_me_button:
     try:
         ridge_model = load(f"{file_prefix}_ridge_model.pkl")
     except Exception as e:
-    st.write(f"Error loading the ridge model: {e}")
+        st.write(f"Error loading the ridge model: {e}")
     exit(1)
 
     # extra_trees_model = load_model(f"{file_prefix}_extra_trees_model.pkl")
     try:
         extra_trees_model = load(f"{file_prefix}_extra_trees.pkl")
     except Exception as e:
-    st.write(f"Error loading the extra_trees: {e}")
+        st.write(f"Error loading the extra_trees: {e}")
     exit(1)
         
     # vectorizer = load_model(f"{file_prefix}_vectorizer.pkl")
@@ -296,7 +296,7 @@ if press_me_button:
     with open(f"{file_prefix}_vectorizer.pkl", 'rb') as f:
         vectorizer = pickle.load(f)
     except Exception as e:
-    st.write(f"Error loading the vectorizer: {e}")
+        st.write(f"Error loading the vectorizer: {e}")
     exit(1)
 
     # Transform the input
