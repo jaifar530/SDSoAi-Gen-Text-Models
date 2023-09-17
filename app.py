@@ -241,6 +241,57 @@ st.write(word_count)
 press_me_button = st.button("Human or Robot?")
 
 if press_me_button:
+    
+    ########## ML 
+
+    word_count = len(re.findall(r'\w+', new_text))
+    st.write(word_count)
+
+    # Choose the appropriate model based on word count
+    if 10 <= word_count <= 34:
+        file_prefix = 'truncated_10_to_34'
+    elif 35 <= word_count <= 59:
+        file_prefix = 'truncated_35_to_59'
+    elif 60 <= word_count <= 84:
+        file_prefix = 'truncated_60_to_84'
+    elif 85 <= word_count <= 109:
+        file_prefix = 'truncated_85_to_109'
+    elif 110 <= word_count <= 134:
+        file_prefix = 'truncated_110_to_134'
+    elif 135 <= word_count <= 159:
+        file_prefix = 'truncated_135_to_159'
+    elif 160 <= word_count <= 184:
+        file_prefix = 'truncated_160_to_184'
+    elif 185 <= word_count <= 209:
+        file_prefix = 'truncated_185_to_209'
+    elif 210 <= word_count <= 234:
+        file_prefix = 'truncated_210_to_234'
+    elif 235 <= word_count <= 259:
+        file_prefix = 'truncated_235_to_259'
+    elif 260 <= word_count <= 284:
+        file_prefix = 'truncated_260_to_284'
+    else:
+        file_prefix = 'not_trancated_full_paragraph'
+    
+    # Load the models and vectorizer
+    ridge_model = load_model(f"{file_prefix}_ridge_model.pkl")
+    extra_trees_model = load_model(f"{file_prefix}_extra_trees_model.pkl")
+    vectorizer = load_model(f"{file_prefix}_vectorizer.pkl")
+    
+    # Transform the input
+    user_input_transformed = vectorizer.transform([new_text])
+    
+    # Make predictions
+    ridge_prediction = ridge_model.predict(user_input_transformed)
+    extra_trees_prediction = extra_trees_model.predict(user_input_transformed)
+    
+    if ridge_prediction == extra_trees_prediction:
+        st.write(f"The author is: {ridge_prediction[0]}")
+    else:
+        st.write(f"Different predictions. Ridge says: {ridge_prediction[0]}, Extra Trees says: {extra_trees_prediction[0]}")
+    
+    
+    ########## DL
     predicted_author, author_probabilities = predict_author(new_text, loaded_model, tokenizer, label_encoder)
     sorted_probabilities = sorted(author_probabilities.items(), key=lambda x: x[1], reverse=True)
   
