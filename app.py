@@ -12,6 +12,7 @@ import numpy as np
 from PIL import Image
 from file_checker import check_and_download_files
 
+st.write(f"Pickle version: {pickle.format_version}")
 
 # Custom headers for the HTTP request
 headers = {
