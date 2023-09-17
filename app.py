@@ -10,7 +10,7 @@ from sklearn.preprocessing import LabelEncoder
 import pickle
 import numpy as np
 from PIL import Image
-from file_checker import check_and_download_files
+from joblib import load
 
 st.write(f"Pickle version: {pickle.format_version}")
 
@@ -275,10 +275,30 @@ if press_me_button:
         file_prefix = 'not_trancated_full_paragraph.xlsx'
     
     # Load the models and vectorizer
-    ridge_model = load_model(f"{file_prefix}_ridge_model.pkl")
-    extra_trees_model = load_model(f"{file_prefix}_extra_trees_model.pkl")
-    vectorizer = load_model(f"{file_prefix}_vectorizer.pkl")
+    #ridge_model = load_model(f"{file_prefix}_ridge_model.pkl")
     
+    try:
+        ridge_model = load(f"{file_prefix}_ridge_model.pkl")
+    except Exception as e:
+    st.write(f"Error loading the ridge model: {e}")
+    exit(1)
+
+    # extra_trees_model = load_model(f"{file_prefix}_extra_trees_model.pkl")
+    try:
+        extra_trees_model = load(f"{file_prefix}_extra_trees.pkl")
+    except Exception as e:
+    st.write(f"Error loading the extra_trees: {e}")
+    exit(1)
+        
+    # vectorizer = load_model(f"{file_prefix}_vectorizer.pkl")
+
+    try:
+    with open(f"{file_prefix}_vectorizer.pkl", 'rb') as f:
+        vectorizer = pickle.load(f)
+    except Exception as e:
+    st.write(f"Error loading the vectorizer: {e}")
+    exit(1)
+
     # Transform the input
     user_input_transformed = vectorizer.transform([new_text])
     
