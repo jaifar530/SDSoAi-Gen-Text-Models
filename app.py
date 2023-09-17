@@ -2,6 +2,7 @@ import streamlit as st
 import zipfile
 import os
 import requests
+import re
 from keras.models import load_model
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
@@ -233,6 +234,8 @@ def predict_author(new_text, model, tokenizer, label_encoder):
     return predicted_label, author_probabilities
 
 new_text = st.text_area("Input Your Text Here:")
+word_count = len(re.findall(r'\w+', new_text))
+st.write(word_count)
 
 # Creates a button named 'Press me'
 press_me_button = st.button("Human or Robot?")
