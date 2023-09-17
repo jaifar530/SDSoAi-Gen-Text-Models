@@ -304,9 +304,11 @@ if press_me_button:
     extra_trees_prediction = extra_trees_model.predict(user_input_transformed)
     
     if ridge_prediction == extra_trees_prediction:
-        st.write(f"The author is: {ridge_prediction[0]}")
+        st.write(f"Same pridiction (Ridge & ExtraTree): {ridge_prediction[0]}")
     else:
-        st.write(f"Different predictions. Ridge says: {ridge_prediction[0]}, Extra Trees says: {extra_trees_prediction[0]}")
+        st.write("Different predictions:")
+        st.write(f"Ridge says: {ridge_prediction[0]}")
+        st.write(f"Extra Trees says: {extra_trees_prediction[0]}")
     
     
     ########## DL
