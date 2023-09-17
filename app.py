@@ -47,7 +47,7 @@ if not os.path.exists('my_authorship_model'):
         r.raise_for_status()
 
         # Debugging: Check if download is successful by examining content length
-        st.write(f"Downloaded model size: {len(r.content)} bytes")
+        # st.write(f"Downloaded model size: {len(r.content)} bytes")
 
         # Save the downloaded content
         with open(zip_file_path, "wb") as f:
@@ -55,21 +55,21 @@ if not os.path.exists('my_authorship_model'):
 
         # Debugging: Verify that the zip file exists
         if os.path.exists(zip_file_path):
-            st.write("Zip file exists")
+            # st.write("Zip file exists")
 
             # Extract the model using zipfile
             with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
                 zip_ref.extractall('my_authorship_model')
                 
-            # Debugging: Check if the folder is successfully created
-            if os.path.exists('my_authorship_model'):
-                st.write("Model folder successfully extracted using zipfile")
-                # Debugging: List the directory contents after extraction
-                st.write("Listing directory contents:")
-                st.write(os.listdir('.'))
-            else:
-                st.write("Model folder was not extracted successfully using zipfile")
-                exit(1)
+            # # Debugging: Check if the folder is successfully created
+            # if os.path.exists('my_authorship_model'):
+            #     # st.write("Model folder successfully extracted using zipfile")
+            #     # Debugging: List the directory contents after extraction
+            #     # st.write("Listing directory contents:")
+            #     # st.write(os.listdir('.'))
+            # else:
+            #     st.write("Model folder was not extracted successfully using zipfile")
+            #     exit(1)
 
         else:
             st.write("Zip file does not exist")
