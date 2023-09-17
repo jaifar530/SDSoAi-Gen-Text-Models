@@ -287,7 +287,8 @@ if press_me_button:
         vectorizer = pickle.load(file)
 
     # Transform the input
-    user_input_transformed = vectorizer.transform(new_text)
+    
+    user_input_transformed = vectorizer.transform([new_text])
 
     # Load the saved models and vectorizer
 
