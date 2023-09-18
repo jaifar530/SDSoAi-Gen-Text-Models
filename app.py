@@ -234,8 +234,7 @@ def predict_author(new_text, model, tokenizer, label_encoder):
     return predicted_label, author_probabilities
 
 new_text = st.text_area("Input Your Text Here:")
-word_count = len(re.findall(r'\w+', new_text))
-st.write(word_count)
+
 
 # Creates a button named 'Press me'
 press_me_button = st.button("Human or Robot?")
@@ -243,9 +242,9 @@ press_me_button = st.button("Human or Robot?")
 if press_me_button:
     
     ########## ML 
-
+    
     word_count = len(re.findall(r'\w+', new_text))
-    st.write(word_count)
+    st.write(f"Words Count: {word_count}")
 
     # Choose the appropriate model based on word count
     if 10 <= word_count <= 34:
@@ -303,18 +302,10 @@ if press_me_button:
     ridge_prediction = ridge_model.predict(user_input_transformed)
     extra_trees_prediction = extra_trees_model.predict(user_input_transformed)
     
-    if ridge_prediction == extra_trees_prediction:
-        st.write(f"Same pridiction (Ridge & ExtraTree): {ridge_prediction[0]}")
-    else:
-        st.write("Different predictions:")
-        st.write(f"Ridge says: {ridge_prediction[0]}")
-        st.write(f"Extra Trees says: {extra_trees_prediction[0]}")
-    
-    
     ########## DL
     predicted_author, author_probabilities = predict_author(new_text, loaded_model, tokenizer, label_encoder)
     sorted_probabilities = sorted(author_probabilities.items(), key=lambda x: x[1], reverse=True)
-  
+    
     author_map = {
         "googlebard": "Google Bard",
         "gpt3": "ChatGPT-3",
@@ -322,17 +313,40 @@ if press_me_button:
         "huggingface": "HuggingChat",
         "human": "Human-Written"
     }
+    cnn_predicted_author_diplay_name =  author_map.get(predicted_author, predicted_author)
+    ridge_predicted_author_diplay_name =  author_map.get(ridge_prediction[0], ridge_prediction[0])
+    extra_trees_predicted_author_diplay_name =  author_map.get(extra_trees_prediction[0], extra_trees_prediction[0])
 
-    predicted_author_diplay_name =  author_map.get(predicted_author, predicted_author)
-    st.write(f"The text is most likely written by: {predicted_author_diplay_name}")
-    st.write("Probabilities for each author are (sorted):")
-    # Mapping the internal names to display names
+    if ridge_prediction == extra_trees_prediction == predicted_author:
+        st.write(f"The text is most likely written by: {ridge_predicted_author_diplay_name}")
+        
+    elif ridge_prediction == extra_trees_prediction:
+        st.write(f"The text is most likely written by: {ridge_predicted_author_diplay_name}")
+        
+    elif extra_trees_prediction == predicted_author:
+        st.write(f"The text is most likely written by: {extra_trees_predicted_author_diplay_name}")
+    
+    elif ridge_prediction == predicted_author:
+        st.write(f"The text is most likely written by: {ridge_predicted_author_diplay_name}")
+        
+    else:
+        st.write("Difficult to Pridict this text, it might fill into one of the below:")
+        st.write(cnn_predicted_author_diplay_name)
+        st.write(ridge_predicted_author_diplay_name)
+        st.write(extra_trees_predicted_author_diplay_name)
 
-
-    for author, prob in sorted_probabilities:
-        display_name = author_map.get(author, author)  # Retrieve the display name, fall back to original if not found
-        st.write(f"{display_name}: {prob * 100:.2f}%")
-        st.progress(float(prob))
+        # with st.expander("What is this project about?"):
+        #     st.write("""
+        #     This project is part of an MSc in Data Analytics at the University of Portsmouth.
+        #     Developed by Jaifar Al Shizawi, it aims to identify whether a text is written by a human or a specific Large Language Model (LLM) like ChatGPT-3, ChatGPT-4, Google Bard, or HuggingChat.
+        #     For inquiries, contact [up2152209@myport.ac.uk](mailto:up2152209@myport.ac.uk).
+        #     Supervised by Dr. Mohamed Bader.
+        #     """)
+        
+    # for author, prob in sorted_probabilities:
+    #     display_name = author_map.get(author, author)  # Retrieve the display name, fall back to original if not found
+    #     st.write(f"{display_name}: {prob * 100:.2f}%")
+    #     st.progress(float(prob))
 
 # Using expander to make FAQ sections
 st.subheader("Frequently Asked Questions (FAQ)")
