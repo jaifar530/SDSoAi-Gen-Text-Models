@@ -465,11 +465,11 @@ with st.expander("Can I use this as evidence?"):
     """)
 
 
-# Creates a button named 'Press me'
-list_dir = st.button("list")
-if list_dir:
-    st.write("Listing directory contents:")
-    st.write(os.listdir('.'))
+# # Creates a button named 'Press me'
+# list_dir = st.button("list")
+# if list_dir:
+#     st.write("Listing directory contents:")
+#     st.write(os.listdir('.'))
 
 
 
