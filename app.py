@@ -334,6 +334,18 @@ if press_me_button:
         
     else:
         # Repeat the text with a space at the end of each iteration
+
+        # Load proper pre-trained for full texts
+        file_prefix = 'not_trancated_full_paragraph.xlsx'
+        with open(f"{file_prefix}_ridge_model.pkl", 'rb') as file:
+            ridge_model = pickle.load(file)
+    
+        with open(f"{file_prefix}_extra_trees_model.pkl", 'rb') as file:
+            extra_trees_model = pickle.load(file)
+        
+        with open(f"{file_prefix}_vectorizer.pkl", 'rb') as file:
+            vectorizer = pickle.load(file)
+        
         repeated_text = ""
         max_word_count = 500
         amplify = 1
@@ -342,7 +354,7 @@ if press_me_button:
         else:
             amplify = math.ceil(max_word_count / word_count)
         
-        for _ in range(amplify-2):
+        for _ in range(amplify):
             repeated_text += new_text + " "
 
         new_text = repeated_text
