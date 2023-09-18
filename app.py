@@ -286,9 +286,7 @@ if press_me_button:
         file_prefix = 'not_trancated_full_paragraph.xlsx'
     
     # Load the models and vectorizer
-    # ridge_model = pickle.load(f"{file_prefix}_ridge_model.pkl")
-    # extra_trees_model = pickle.load(f"{file_prefix}_extra_trees_model.pkl")
-    # vectorizer = pickle.load(f"{file_prefix}_vectorizer.pkl")
+    
     with open(f"{file_prefix}_ridge_model.pkl", 'rb') as file:
         ridge_model = pickle.load(file)
     
@@ -323,7 +321,7 @@ if press_me_button:
     cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
     
     if ridge_prediction == extra_trees_prediction == predicted_author:
-        st.success(f"Most likely written by: {ridge_name}", icon="✅")
+        st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
         st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
 
     else:
@@ -371,36 +369,36 @@ if press_me_button:
         cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
 
         if ridge_prediction == extra_trees_prediction == predicted_author:
-            st.success(f"Most likely written by: {ridge_name}", icon="✅")
+            st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
             st.write("_" * 30)
-            st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
+            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             
         elif ridge_prediction == extra_trees_prediction:
-            st.success(f"Most likely written by: {ridge_name}", icon="✅")
-            st.success(f"2nd Most likely written by: {cnn_name}", icon="✅")
+            st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
+            st.success(f"2nd Most likely written by: **{cnn_name}**", icon="✅")
             st.write("_" * 30)
-            st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
+            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             
         elif extra_trees_prediction == predicted_author:
-            st.success(f"Most likely written by: {extra_trees_name}", icon="✅")
-            st.success(f"2nd Most likely written by: {ridge_name}", icon="✅")
+            st.success(f"Most likely written by: **{extra_trees_name}**", icon="✅")
+            st.success(f"2nd Most likely written by: **{ridge_name}**", icon="✅")
             st.write("_" * 30)
-            st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
+            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
         
         elif ridge_prediction == predicted_author:
-            st.success(f"Most likely written by: {ridge_name}", icon="✅")
-            st.success(f"2nd Most likely written by: {extra_trees_name}", icon="✅")
+            st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
+            st.success(f"2nd Most likely written by: **{extra_trees_name}**", icon="✅")
             st.write("_" * 30)
-            st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
+            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
 
             
         else:
-            st.warning("Difficult to predict this text, it might fill into one of the below:", icon="⚠️")
-            st.success(f"1- {ridge_name}", icon="✅")
-            st.success(f"2- {cnn_name}", icon="✅")
-            st.success(f"3- {extra_trees_name}", icon="✅")
+            st.warning("Notice 1: There is a difficulity predicting this text, it might fill into one of the below:", icon="⚠️")
+            st.success(f"1- **{ridge_name}**", icon="✅")
+            st.success(f"2- **{cnn_name}**", icon="✅")
+            st.success(f"3- **{extra_trees_name}**", icon="✅")
             st.write("_" * 30)
-            st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
+            st.warning(f"**Notice 2:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
 
         # with st.expander("What is this project about?"):
         #     st.write("""
