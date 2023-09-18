@@ -12,6 +12,8 @@ import numpy as np
 from PIL import Image
 from joblib import load
 import math
+from streamlit_extras.let_it_rain import rain
+
 
 
 # Custom headers for the HTTP request
@@ -323,6 +325,12 @@ if press_me_button:
     if ridge_prediction == extra_trees_prediction == predicted_author:
         st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
         st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
+        rain(
+            emoji="😃",
+            font_size=54,
+            falling_speed=5,
+            animation_length="infinite",
+        )
 
     else:
         # Repeat the text with a space at the end of each iteration
@@ -372,24 +380,48 @@ if press_me_button:
             st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
             st.warning(f"**Notice:** Your input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             st.write("_" * 30)
+            rain(
+                emoji="😃",
+                font_size=54,
+                falling_speed=5,
+                animation_length="infinite",
+            )
             
         elif ridge_prediction == extra_trees_prediction:
             st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
             st.success(f"2nd Most likely written by: **{cnn_name}**", icon="✅")
             st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             st.write("_" * 30)
+            rain(
+                emoji="😐",
+                font_size=54,
+                falling_speed=5,
+                animation_length="infinite",
+            )
             
         elif extra_trees_prediction == predicted_author:
             st.success(f"Most likely written by: **{extra_trees_name}**", icon="✅")
             st.success(f"2nd Most likely written by: **{ridge_name}**", icon="✅")
             st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             st.write("_" * 30)
+            rain(
+                emoji="😐",
+                font_size=54,
+                falling_speed=5,
+                animation_length="infinite",
+            )
             
         elif ridge_prediction == predicted_author:
             st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
             st.success(f"2nd Most likely written by: **{extra_trees_name}**", icon="✅")
             st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             st.write("_" * 30)
+            rain(
+                emoji="😐",
+                font_size=54,
+                falling_speed=5,
+                animation_length="infinite",
+            )
 
             
         else:
@@ -399,6 +431,12 @@ if press_me_button:
             st.success(f"3- **{extra_trees_name}**", icon="✅")
             st.warning(f"**Notice 2:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             st.write("_" * 30)
+            rain(
+                emoji="😕",
+                font_size=54,
+                falling_speed=5,
+                animation_length="infinite",
+            )
 
 
         # with st.expander("What is this project about?"):
