@@ -318,19 +318,23 @@ if press_me_button:
     extra_trees_predicted_author_diplay_name =  author_map.get(extra_trees_prediction[0], extra_trees_prediction[0])
 
     if ridge_prediction == extra_trees_prediction == predicted_author:
-        st.write(f"The text is most likely written by: {ridge_predicted_author_diplay_name}")
+        st.write(f"Most likely written by: {ridge_predicted_author_diplay_name}")
+        
         
     elif ridge_prediction == extra_trees_prediction:
-        st.write(f"The text is most likely written by: {ridge_predicted_author_diplay_name}")
+        st.write(f"Most likely written by: {ridge_predicted_author_diplay_name}")
+        st.write(f"2nd Most likely written by: {cnn_predicted_author_diplay_name}")
         
     elif extra_trees_prediction == predicted_author:
-        st.write(f"The text is most likely written by: {extra_trees_predicted_author_diplay_name}")
+        st.write(f"Most likely written by: {extra_trees_predicted_author_diplay_name}")
+        st.write(f"2nd Most likely written by: {ridge_predicted_author_diplay_name}")
     
     elif ridge_prediction == predicted_author:
-        st.write(f"The text is most likely written by: {ridge_predicted_author_diplay_name}")
+        st.write(f"Most likely written by: {ridge_predicted_author_diplay_name}")
+        st.write(f"2nd Most likely written by: {extra_trees_predicted_author_diplay_name}")
         
     else:
-        st.write("Difficult to Pridict this text, it might fill into one of the below:")
+        st.write("Difficult to predict this text, it might fill into one of the below:")
         st.write(cnn_predicted_author_diplay_name)
         st.write(ridge_predicted_author_diplay_name)
         st.write(extra_trees_predicted_author_diplay_name)
