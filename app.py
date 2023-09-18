@@ -11,6 +11,7 @@ import pickle
 import numpy as np
 from PIL import Image
 from joblib import load
+import math
 
 
 # Custom headers for the HTTP request
@@ -36,6 +37,19 @@ st.image(banner_image, caption='', use_column_width=True)
 
 ################ end loading banner image ##################
 
+def get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction):
+    author_map = {
+        "googlebard": "Google Bard",
+        "gpt3": "ChatGPT-3",
+        "gpt4": "ChatGPT-4",
+        "huggingface": "HuggingChat",
+        "human": "Human-Written"
+    }
+    cnn_predicted_author_display_name = author_map.get(predicted_author, predicted_author)
+    ridge_predicted_author_display_name = author_map.get(ridge_prediction[0], ridge_prediction[0])
+    extra_trees_predicted_author_display_name = author_map.get(extra_trees_prediction[0], extra_trees_prediction[0])
+    
+    return cnn_predicted_author_display_name, ridge_predicted_author_display_name, extra_trees_predicted_author_display_name
 
 ############# Download Or Check Files/folders exeistince ##############
 # Check if the model folder exists
@@ -292,18 +306,8 @@ if press_me_button:
         vectorizer = pickle.load(file)
 
     # Transform the input
-    
     user_input_transformed = vectorizer.transform([new_text])
 
-    # Load the saved models and vectorizer
-
-    # loaded_ridge_classifier = joblib.load(f'{excel_file_to_use}_ridge_model.pkl')
-    # loaded_extra_trees_classifier = joblib.load(f'{excel_file_to_use}_extra_trees_model.pkl')
-    # loaded_vectorizer = joblib.load(f'{excel_file_to_use}_vectorizer.pkl')
-
-    # user_input_vectorized = loaded_vectorizer.transform(user_input)
-
-    
     # Make predictions
     ridge_prediction = ridge_model.predict(user_input_transformed)
     extra_trees_prediction = extra_trees_model.predict(user_input_transformed)
@@ -319,31 +323,66 @@ if press_me_button:
         "huggingface": "HuggingChat",
         "human": "Human-Written"
     }
-    cnn_predicted_author_diplay_name =  author_map.get(predicted_author, predicted_author)
-    ridge_predicted_author_diplay_name =  author_map.get(ridge_prediction[0], ridge_prediction[0])
-    extra_trees_predicted_author_diplay_name =  author_map.get(extra_trees_prediction[0], extra_trees_prediction[0])
+    # cnn_name =  author_map.get(predicted_author, predicted_author)
+    # ridge_name =  author_map.get(ridge_prediction[0], ridge_prediction[0])
+    # extra_trees_name =  author_map.get(extra_trees_prediction[0], extra_trees_prediction[0])
 
-    if ridge_prediction == extra_trees_prediction == predicted_author:
-        st.write(f"Most likely written by: {ridge_predicted_author_diplay_name}")
-        
-        
-    elif ridge_prediction == extra_trees_prediction:
-        st.write(f"Most likely written by: {ridge_predicted_author_diplay_name}")
-        st.write(f"2nd Most likely written by: {cnn_predicted_author_diplay_name}")
-        
-    elif extra_trees_prediction == predicted_author:
-        st.write(f"Most likely written by: {extra_trees_predicted_author_diplay_name}")
-        st.write(f"2nd Most likely written by: {ridge_predicted_author_diplay_name}")
+    cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
     
-    elif ridge_prediction == predicted_author:
-        st.write(f"Most likely written by: {ridge_predicted_author_diplay_name}")
-        st.write(f"2nd Most likely written by: {extra_trees_predicted_author_diplay_name}")
+    if ridge_prediction == extra_trees_prediction == predicted_author:
+        st.write(f"Most likely written by: {ridge_name}")
         
     else:
-        st.write("Difficult to predict this text, \nit might fill into one of the below:")
-        st.write(f"- {ridge_predicted_author_diplay_name}")
-        st.write(f"- {cnn_predicted_author_diplay_name}")
-        st.write(f"- {extra_trees_predicted_author_diplay_name}")
+        # Repeat the text with a space at the end of each iteration
+        repeated_text = ""
+        max_word_count = 500
+        amplify = 1
+        if word_count >= max_word_count:
+            amplify = 2
+        else
+            amplify = math.ceil(max_word_count / word_count)
+        
+        for _ in range(amplify):
+            repeated_text += new_text + " "
+
+        new_text = repeated_text
+
+        ## Repeat ML 
+        
+        # Transform the input
+        user_input_transformed = vectorizer.transform([new_text])
+    
+        # Make predictions
+        ridge_prediction = ridge_model.predict(user_input_transformed)
+        extra_trees_prediction = extra_trees_model.predict(user_input_transformed)
+        
+        ### Repeat DL
+        predicted_author, author_probabilities = predict_author(new_text, loaded_model, tokenizer, label_encoder)
+        sorted_probabilities = sorted(author_probabilities.items(), key=lambda x: x[1], reverse=True)
+
+        # Get disply name
+        cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
+
+        if ridge_prediction == extra_trees_prediction == predicted_author:
+            st.write(f"Most likely written by: {ridge_name}")
+            
+        elif ridge_prediction == extra_trees_prediction:
+            st.write(f"Most likely written by: {ridge_name}")
+            st.write(f"2nd Most likely written by: {cnn_name}")
+            
+        elif extra_trees_prediction == predicted_author:
+            st.write(f"Most likely written by: {extra_trees_name}")
+            st.write(f"2nd Most likely written by: {ridge_name}")
+        
+        elif ridge_prediction == predicted_author:
+            st.write(f"Most likely written by: {ridge_name}")
+            st.write(f"2nd Most likely written by: {extra_trees_name}")
+            
+        else:
+            st.write("Difficult to predict this text, \nit might fill into one of the below:")
+            st.write(f"- {ridge_name}")
+            st.write(f"- {cnn_name}")
+            st.write(f"- {extra_trees_name}")
 
         # with st.expander("What is this project about?"):
         #     st.write("""
