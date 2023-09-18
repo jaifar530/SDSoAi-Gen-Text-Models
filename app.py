@@ -249,13 +249,6 @@ def predict_author(new_text, model, tokenizer, label_encoder):
 
 new_text = st.text_area("Input Your Text Here:")
 
-# repeated_text = ""
-# # Repeat the text twice with a space at the end of each iteration
-# for _ in range(5):
-#     repeated_text += new_text + " "
-
-# new_text = repeated_text
-
 # Creates a button named 'Press me'
 press_me_button = st.button("Human or Robot?")
 
@@ -330,8 +323,9 @@ if press_me_button:
     cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
     
     if ridge_prediction == extra_trees_prediction == predicted_author:
-        st.write(f"Most likely written by: {ridge_name}")
-        
+        st.success(f"Most likely written by: {ridge_name}", icon="✅")
+        st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
+
     else:
         # Repeat the text with a space at the end of each iteration
 
@@ -377,19 +371,24 @@ if press_me_button:
         cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
 
         if ridge_prediction == extra_trees_prediction == predicted_author:
-            st.write(f"Most likely written by: {ridge_name}")
+            st.success(f"Most likely written by: {ridge_name}", icon="✅")
+            st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             
         elif ridge_prediction == extra_trees_prediction:
-            st.write(f"Most likely written by: {ridge_name}")
-            st.write(f"2nd Most likely written by: {cnn_name}")
+            st.success(f"Most likely written by: {ridge_name}", icon="✅")
+            st.success(f"2nd Most likely written by: {cnn_name}", icon="✅")
+            st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             
         elif extra_trees_prediction == predicted_author:
-            st.write(f"Most likely written by: {extra_trees_name}")
-            st.write(f"2nd Most likely written by: {ridge_name}")
+            st.success(f"Most likely written by: {extra_trees_name}", icon="✅")
+            st.success(f"2nd Most likely written by: {ridge_name}", icon="✅")
+            st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
         
         elif ridge_prediction == predicted_author:
-            st.write(f"Most likely written by: {ridge_name}")
-            st.write(f"2nd Most likely written by: {extra_trees_name}")
+            st.success(f"Most likely written by: {ridge_name}", icon="✅")
+            st.success(f"2nd Most likely written by: {extra_trees_name}", icon="✅")
+            st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
+
             
         else:
             st.write("Difficult to predict this text, \nit might fill into one of the below:")
