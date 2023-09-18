@@ -93,7 +93,7 @@ if not os.path.exists('my_authorship_model'):
         st.write(f"Failed to download or extract the model: {e}")
         exit(1)
 else:
-     st.write("Version: 2.1")
+     st.write("Version: 0.99")
 
 
 # Download the required files
