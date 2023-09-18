@@ -235,12 +235,12 @@ def predict_author(new_text, model, tokenizer, label_encoder):
 
 new_text = st.text_area("Input Your Text Here:")
 
-# repeated_text = ""
-# # Repeat the text twice with a space at the end of each iteration
-# for _ in range(3):
-#     repeated_text += new_text + " "
+repeated_text = ""
+# Repeat the text twice with a space at the end of each iteration
+for _ in range(3):
+    repeated_text += new_text + " "
 
-# new_text = repeated_text
+new_text = repeated_text
 
 # Creates a button named 'Press me'
 press_me_button = st.button("Human or Robot?")
