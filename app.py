@@ -393,9 +393,9 @@ if press_me_button:
             
         else:
             st.write("Difficult to predict this text, \nit might fill into one of the below:")
-            st.write(f"- {ridge_name}")
-            st.write(f"- {cnn_name}")
-            st.write(f"- {extra_trees_name}")
+            st.write(f"1- {ridge_name}")
+            st.write(f"2- {cnn_name}")
+            st.write(f"3- {extra_trees_name}")
 
         # with st.expander("What is this project about?"):
         #     st.write("""
