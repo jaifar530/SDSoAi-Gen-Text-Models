@@ -12,45 +12,6 @@ import numpy as np
 from PIL import Image
 from joblib import load
 import math
-import streamlit as st
-
-st.title("Rain Emojis")
-
-# Custom HTML and JavaScript for falling emojis
-st.markdown(
-    """
-    <style>
-    .emoji {
-        position: fixed;
-        font-size: 54px;
-    }
-    </style>
-    <div id="emoji-container"></div>
-    <script>
-    function makeEmojiFall() {
-        var emoji = document.createElement("div");
-        emoji.className = "emoji";
-        emoji.innerText = "🎈";
-        document.getElementById("emoji-container").appendChild(emoji);
-        emoji.style.left = Math.random() * window.innerWidth + "px";
-        emoji.style.animationDuration = Math.random() * 5 + 3 + "s";
-        emoji.style.animationName = "fall";
-    }
-    setInterval(makeEmojiFall, 1000);
-    </script>
-    <style>
-    @keyframes fall {
-        from {
-            top: -100px;
-        }
-        to {
-            top: 100vh;
-        }
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
 
 
 
