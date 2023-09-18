@@ -372,29 +372,35 @@ if press_me_button:
 
         if ridge_prediction == extra_trees_prediction == predicted_author:
             st.success(f"Most likely written by: {ridge_name}", icon="✅")
+            st.write("_" * 30)
             st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             
         elif ridge_prediction == extra_trees_prediction:
             st.success(f"Most likely written by: {ridge_name}", icon="✅")
             st.success(f"2nd Most likely written by: {cnn_name}", icon="✅")
+            st.write("_" * 30)
             st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             
         elif extra_trees_prediction == predicted_author:
             st.success(f"Most likely written by: {extra_trees_name}", icon="✅")
             st.success(f"2nd Most likely written by: {ridge_name}", icon="✅")
+            st.write("_" * 30)
             st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
         
         elif ridge_prediction == predicted_author:
             st.success(f"Most likely written by: {ridge_name}", icon="✅")
             st.success(f"2nd Most likely written by: {extra_trees_name}", icon="✅")
+            st.write("_" * 30)
             st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
 
             
         else:
-            st.write("Difficult to predict this text, \nit might fill into one of the below:")
-            st.write(f"1- {ridge_name}")
-            st.write(f"2- {cnn_name}")
-            st.write(f"3- {extra_trees_name}")
+            st.warning("Difficult to predict this text, it might fill into one of the below:", icon="⚠️")
+            st.success(f"1- {ridge_name}", icon="✅")
+            st.success(f"2- {cnn_name}", icon="✅")
+            st.success(f"3- {extra_trees_name}", icon="✅")
+            st.write("_" * 30)
+            st.warning(f"The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
 
         # with st.expander("What is this project about?"):
         #     st.write("""
