@@ -339,14 +339,16 @@ if press_me_button:
         amplify = 1
         if word_count >= max_word_count:
             amplify = 2
-        else
+        else:
             amplify = math.ceil(max_word_count / word_count)
         
         for _ in range(amplify):
             repeated_text += new_text + " "
 
         new_text = repeated_text
-
+        
+        word_count = len(re.findall(r'\w+', new_text))
+        st.write(f"New Words Count: {word_count}")
         ## Repeat ML 
         
         # Transform the input
