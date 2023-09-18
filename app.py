@@ -237,7 +237,7 @@ new_text = st.text_area("Input Your Text Here:")
 
 repeated_text = ""
 # Repeat the text twice with a space at the end of each iteration
-for _ in range(3):
+for _ in range(5):
     repeated_text += new_text + " "
 
 new_text = repeated_text
