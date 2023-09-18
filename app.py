@@ -212,8 +212,8 @@ def check_and_download_files():
             st.write("content.zip downloaded and extracted successfully.")
         except Exception as e:
             st.write(f"Error downloading or extracting content.zip: {e}")
-    else:
-        st.write("All files exist.")
+    # else:
+    #     st.write("All files exist.")
 
 check_and_download_files()
 
