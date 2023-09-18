@@ -360,7 +360,6 @@ if press_me_button:
         new_text = repeated_text
         
         word_count = len(re.findall(r'\w+', new_text))
-        st.write(f"New Words Count: {word_count}")
         ## Repeat ML 
         
         # Transform the input
