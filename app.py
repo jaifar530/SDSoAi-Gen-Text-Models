@@ -334,10 +334,10 @@ if press_me_button:
         st.write(f"2nd Most likely written by: {extra_trees_predicted_author_diplay_name}")
         
     else:
-        st.write("Difficult to predict this text, it might fill into one of the below:")
-        st.write(cnn_predicted_author_diplay_name)
-        st.write(ridge_predicted_author_diplay_name)
-        st.write(extra_trees_predicted_author_diplay_name)
+        st.write("Difficult to predict this text, \nit might fill into one of the below:")
+        st.write(f"- {ridge_predicted_author_diplay_name}")
+        st.write(f"- {cnn_predicted_author_diplay_name}")
+        st.write(f"- {extra_trees_predicted_author_diplay_name}")
 
         # with st.expander("What is this project about?"):
         #     st.write("""
