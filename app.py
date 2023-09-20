@@ -315,9 +315,7 @@ if press_me_button:
         "huggingface": "HuggingChat",
         "human": "Human-Written"
     }
-    # cnn_name =  author_map.get(predicted_author, predicted_author)
-    # ridge_name =  author_map.get(ridge_prediction[0], ridge_prediction[0])
-    # extra_trees_name =  author_map.get(extra_trees_prediction[0], extra_trees_prediction[0])
+
 
     cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
     with st.expander("1st iteration Details..."):
@@ -328,11 +326,12 @@ if press_me_button:
             display_name = author_map.get(author, author)  # Retrieve the display name, fall back to original if not found
             st.write(f"{display_name}: {prob * 100:.2f}%")
             st.progress(float(prob))
-            
+    st.write(f"Sorted probab: {sorted_probabilities[0][0] }")
     if ridge_prediction == extra_trees_prediction == predicted_author:
         st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
         st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
-        
+    
+    elif sorted_probabilities[0][0] == 0.1 :  
     else:
         # Repeat the text with a space at the end of each iteration
 
@@ -355,7 +354,7 @@ if press_me_button:
         else:
             amplify = math.ceil(max_word_count / word_count)
         
-        for _ in range(2):
+        for _ in range(amplify):
             repeated_text += new_text + " "
 
         new_text = repeated_text
