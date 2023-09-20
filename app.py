@@ -439,7 +439,7 @@ if press_me_button:
             #     falling_speed=5,
             #     animation_length="infinite",
             # )
-        elif new_max_cnn_prob == max_cnn_prob and new_max_cnn_prob_name == max_cnn_prob_name:
+        elif new_max_cnn_prob_name == max_cnn_prob_name:
             st.success(f"Most likely written by: **{cnn_name}**", icon="✅")
             st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             st.write("_" * 30)
