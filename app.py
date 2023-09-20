@@ -340,7 +340,7 @@ if press_me_button:
         if extra_trees_prediction == predicted_author:
             st.success(f"Most likely written by: **{extra_trees_name}**", icon="✅")
             st.success(f"2nd Most likely written by: **{ridge_name}**", icon="✅")
-            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
+          #  st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             st.write("_" * 30)
             # rain(
             #     emoji="😐",
@@ -352,7 +352,7 @@ if press_me_button:
         elif ridge_prediction == predicted_author:
             st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
             st.success(f"2nd Most likely written by: **{extra_trees_name}**", icon="✅")
-            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
+          #  st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             st.write("_" * 30)
             # rain(
             #     emoji="😐",
@@ -364,7 +364,7 @@ if press_me_button:
     elif ridge_prediction == extra_trees_prediction:
             st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
             st.success(f"2nd Most likely written by: **{cnn_name}**", icon="✅")
-            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
+            #st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             st.write("_" * 30)
             # rain(
             #     emoji="😐",
