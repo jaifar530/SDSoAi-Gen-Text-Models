@@ -320,7 +320,7 @@ if press_me_button:
     # extra_trees_name =  author_map.get(extra_trees_prediction[0], extra_trees_prediction[0])
 
     cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
-    with st.expander("Show More Details..."):
+    with st.expander("First iteration Details..."):
         st.write(f"Ridge: {ridge_name}")
         st.write(f"ExtraTree: {extra_trees_name}")
         st.write(f"CNN: {cnn_name}")
@@ -372,7 +372,11 @@ if press_me_button:
 
         # Get disply name
         cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
-
+        with st.expander("First iteration Details..."):
+            st.write(f"Ridge: {ridge_name}")
+            st.write(f"ExtraTree: {extra_trees_name}")
+            st.write(f"CNN: {cnn_name}")
+            
         if ridge_prediction == extra_trees_prediction == predicted_author:
             st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
             st.warning(f"**Notice:** Your input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
