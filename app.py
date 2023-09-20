@@ -320,7 +320,7 @@ if press_me_button:
     # extra_trees_name =  author_map.get(extra_trees_prediction[0], extra_trees_prediction[0])
 
     cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
-    with st.expander("First iteration Details..."):
+    with st.expander("1st iteration Details..."):
         st.write(f"Ridge: {ridge_name}")
         st.write(f"ExtraTree: {extra_trees_name}")
         st.write(f"CNN: {cnn_name}")
@@ -372,7 +372,7 @@ if press_me_button:
 
         # Get disply name
         cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
-        with st.expander("First iteration Details..."):
+        with st.expander("2nd iteration Details..."):
             st.write(f"Ridge: {ridge_name}")
             st.write(f"ExtraTree: {extra_trees_name}")
             st.write(f"CNN: {cnn_name}")
