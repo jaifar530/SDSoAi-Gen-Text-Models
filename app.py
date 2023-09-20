@@ -321,11 +321,10 @@ if press_me_button:
 
     cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
     with st.expander("Show More Details..."):
-        st.write(f"""
-        Ridge: {ridge_name}
-        ExtraTree: {extra_trees_name}
-        CNN: {cnn_name}
-        """)
+        st.write(f"Ridge: {ridge_name}")
+        st.write(f"ExtraTree: {extra_trees_name}")
+        st.write(f"CNN: {cnn_name}")
+        
     if ridge_prediction == extra_trees_prediction == predicted_author:
         st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
         st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
