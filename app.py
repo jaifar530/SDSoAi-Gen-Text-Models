@@ -326,12 +326,37 @@ if press_me_button:
             display_name = author_map.get(author, author)  # Retrieve the display name, fall back to original if not found
             st.write(f"{display_name}: {prob * 100:.2f}%")
             st.progress(float(prob))
+            
     st.write(f"Sorted probab: {sorted_probabilities[0][0] }")
     if ridge_prediction == extra_trees_prediction == predicted_author:
         st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
         st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
     
-    elif sorted_probabilities[0][0] == 0.1 :  
+    elif sorted_probabilities[0][0] == 0.1 : 
+        elif extra_trees_prediction == predicted_author:
+            st.success(f"Most likely written by: **{extra_trees_name}**", icon="✅")
+            st.success(f"2nd Most likely written by: **{ridge_name}**", icon="✅")
+            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
+            st.write("_" * 30)
+            # rain(
+            #     emoji="😐",
+            #     font_size=54,
+            #     falling_speed=5,
+            #     animation_length="infinite",
+            # )
+            
+        elif ridge_prediction == predicted_author:
+            st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
+            st.success(f"2nd Most likely written by: **{extra_trees_name}**", icon="✅")
+            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
+            st.write("_" * 30)
+            # rain(
+            #     emoji="😐",
+            #     font_size=54,
+            #     falling_speed=5,
+            #     animation_length="infinite",
+            # )
+
     else:
         # Repeat the text with a space at the end of each iteration
 
