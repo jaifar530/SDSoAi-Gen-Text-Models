@@ -355,7 +355,7 @@ if press_me_button:
         else:
             amplify = math.ceil(max_word_count / word_count)
         
-        for _ in range(amplify):
+        for _ in range(6):
             repeated_text += new_text + " "
 
         new_text = repeated_text
