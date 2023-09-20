@@ -327,7 +327,8 @@ if press_me_button:
             st.write(f"{display_name}: {prob * 100:.2f}%")
             st.progress(float(prob))
             
-    st.write(f"Sorted probab: {sorted_probabilities[0][0] }")
+    st.write(f"Sorted probab: {sorted_probabilities[0][1] }")
+    
     if ridge_prediction == extra_trees_prediction == predicted_author:
         st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
         st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
