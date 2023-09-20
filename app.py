@@ -328,13 +328,13 @@ if press_me_button:
             st.progress(float(prob))
             
     st.write(f"Sorted probab: {sorted_probabilities[0][1] }")
-    
+    max_prob = float(sorted_probabilities[0][1])
     if ridge_prediction == extra_trees_prediction == predicted_author:
         st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
         st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
     
     
-    elif float(sorted_probabilities[0][1]) == 0.1: 
+    elif max_prob == 0.1: 
         elif extra_trees_prediction == predicted_author:
             st.success(f"Most likely written by: **{extra_trees_name}**", icon="✅")
             st.success(f"2nd Most likely written by: **{ridge_name}**", icon="✅")
