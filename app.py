@@ -332,6 +332,7 @@ if press_me_button:
         st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
         st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
     
+    
     elif sorted_probabilities[0][0] == 0.1 : 
         elif extra_trees_prediction == predicted_author:
             st.success(f"Most likely written by: **{extra_trees_name}**", icon="✅")
