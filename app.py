@@ -328,13 +328,15 @@ if press_me_button:
             st.progress(float(prob))
             
     st.write(f"Sorted probab: {sorted_probabilities[0][1] }")
-    max_prob = float(sorted_probabilities[0][1])
+    max_cnn_prob = float(sorted_probabilities[0][1])
+
+    
     if ridge_prediction == extra_trees_prediction == predicted_author:
         st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
         st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
     
     
-    elif max_prob == 0.1: 
+    elif max_cnn_prob == 0.1: 
         if extra_trees_prediction == predicted_author:
             st.success(f"Most likely written by: **{extra_trees_name}**", icon="✅")
             st.success(f"2nd Most likely written by: **{ridge_name}**", icon="✅")
@@ -359,6 +361,17 @@ if press_me_button:
             #     animation_length="infinite",
             # )
 
+    elif ridge_prediction == extra_trees_prediction:
+            st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
+            st.success(f"2nd Most likely written by: **{cnn_name}**", icon="✅")
+            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
+            st.write("_" * 30)
+            # rain(
+            #     emoji="😐",
+            #     font_size=54,
+            #     falling_speed=5,
+            #     animation_length="infinite",
+            # )
     else:
         # Repeat the text with a space at the end of each iteration
 
