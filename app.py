@@ -324,7 +324,11 @@ if press_me_button:
         st.write(f"Ridge: {ridge_name}")
         st.write(f"ExtraTree: {extra_trees_name}")
         st.write(f"CNN: {cnn_name}")
-        
+        for author, prob in sorted_probabilities:
+            display_name = author_map.get(author, author)  # Retrieve the display name, fall back to original if not found
+            st.write(f"{display_name}: {prob * 100:.2f}%")
+            st.progress(float(prob))
+            
     if ridge_prediction == extra_trees_prediction == predicted_author:
         st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
         st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
@@ -376,7 +380,11 @@ if press_me_button:
             st.write(f"Ridge: {ridge_name}")
             st.write(f"ExtraTree: {extra_trees_name}")
             st.write(f"CNN: {cnn_name}")
-            
+            for author, prob in sorted_probabilities:
+                display_name = author_map.get(author, author) 
+                st.write(f"{display_name}: {prob * 100:.2f}%")
+                st.progress(float(prob))
+                
         if ridge_prediction == extra_trees_prediction == predicted_author:
             st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
             st.warning(f"**Notice:** Your input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
