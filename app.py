@@ -229,7 +229,7 @@ with open('tokenizer.pkl', 'rb') as handle:
 with open('label_encoder.pkl', 'rb') as handle:
     label_encoder = pickle.load(handle)
 
-max_length = 300  # As defined in the training code
+max_length = 300 
 
 ############### End Load CNN Model ############
 
@@ -256,7 +256,6 @@ press_me_button = st.button("Human or Robot?")
 if press_me_button:
     
     ########## ML 
-    
     word_count = len(re.findall(r'\w+', new_text))
     st.write(f"Words Count: {word_count}")
 
@@ -297,14 +296,14 @@ if press_me_button:
     with open(f"{file_prefix}_vectorizer.pkl", 'rb') as file:
         vectorizer = pickle.load(file)
 
-    # Transform the input
+    # ML Vectorizing the input
     user_input_transformed = vectorizer.transform([new_text])
 
-    # Make predictions
+    # ML predictions
     ridge_prediction = ridge_model.predict(user_input_transformed)
     extra_trees_prediction = extra_trees_model.predict(user_input_transformed)
     
-    ########## DL
+    # CNN prediction + Vectorizing the input
     predicted_author, author_probabilities = predict_author(new_text, loaded_model, tokenizer, label_encoder)
     sorted_probabilities = sorted(author_probabilities.items(), key=lambda x: x[1], reverse=True)
     
@@ -332,7 +331,7 @@ if press_me_button:
     max_cnn_prob_name = sorted_probabilities[0][0]
     max_cnn_prob = float(sorted_probabilities[0][1])
 
-    if word_count < 10 or word_count > 1081:
+    if word_count < 10.0 or word_count > 1081.0:
         st.info("For better prediction input texts between 10 and 1081", icon="ℹ️")
 
     elif word_count < 256: 
