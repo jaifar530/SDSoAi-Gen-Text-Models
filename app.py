@@ -325,8 +325,6 @@ if press_me_button:
             st.write(f"{display_name}: {prob * 100:.2f}%")
             st.progress(float(prob))
             
-    st.write(f"Sorted probab: {sorted_probabilities[0][1] }")
-
     max_cnn_prob_name = sorted_probabilities[0][0]
     max_cnn_prob = float(sorted_probabilities[0][1])
 
