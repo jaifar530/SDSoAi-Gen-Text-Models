@@ -332,7 +332,7 @@ if press_me_button:
     max_cnn_prob = float(sorted_probabilities[0][1])
 
     if word_count < 10.0 or word_count > 1081.0:
-        st.info("For better prediction input texts between 10 and 1081", icon="ℹ️")
+        st.warning("For better prediction input texts between 10 and 1081", icon="ℹ️")
 
     elif word_count < 256: 
         if ridge_prediction == extra_trees_prediction == predicted_author:
