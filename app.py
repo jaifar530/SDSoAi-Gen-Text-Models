@@ -332,188 +332,53 @@ if press_me_button:
     max_cnn_prob_name = sorted_probabilities[0][0]
     max_cnn_prob = float(sorted_probabilities[0][1])
 
-    
-    if ridge_prediction == extra_trees_prediction == predicted_author:
-        st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
-        st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
-    
-    
-    elif max_cnn_prob == 1.0: 
-        if extra_trees_prediction == predicted_author:
-            st.success(f"Most likely written by: **{extra_trees_name}**", icon="✅")
-            st.success(f"2nd Most likely written by: **{ridge_name}**", icon="✅")
-          #  st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
-            st.write("_" * 30)
-            # rain(
-            #     emoji="😐",
-            #     font_size=54,
-            #     falling_speed=5,
-            #     animation_length="infinite",
-            # )
+    if word_count < 10 or word_count > 1081:
+        st.info("For better prediction input texts between 10 and 1081", icon="ℹ️")
+
+    elif word_count < 256: 
+        if ridge_prediction == extra_trees_prediction == predicted_author:
+            st.success(f"Most likely written by: **{cnn_name}**", icon="✅")
+            st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
             
+        elif ridge_prediction == predicted_author:
+            st.success(f"Most likely written by: **{cnn_name}**", icon="✅")
+            st.success(f"2nd Most likely written by: **{extra_trees_name}**", icon="✅")
+            st.write("_" * 30)
+
+        elif extra_trees_prediction == predicted_author:
+            st.success(f"Most likely written by: **{cnn_name}**", icon="✅")
+            st.success(f"2nd Most likely written by: **{ridge_name}**", icon="✅")
+            st.write("_" * 30)
+
+        else:
+            st.warning("Notice 1: There is a difficulity predicting your text, it might fill into one of the below:", icon="⚠️")
+            st.success(f"1- **{cnn_name}**", icon="✅")
+            st.success(f"2- **{ridge_name}**", icon="✅")
+            st.success(f"3- **{extra_trees_name}**", icon="✅")
+    
+    else: 
+        if ridge_prediction == extra_trees_prediction == predicted_author:
+            st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
+            st.info("We are quite confident in the accuracy of this result.", icon="ℹ️")
+
         elif ridge_prediction == predicted_author:
             st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
             st.success(f"2nd Most likely written by: **{extra_trees_name}**", icon="✅")
-          #  st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             st.write("_" * 30)
-            # rain(
-            #     emoji="😐",
-            #     font_size=54,
-            #     falling_speed=5,
-            #     animation_length="infinite",
-            # )
 
-    elif ridge_prediction == extra_trees_prediction:
-            st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
-            st.success(f"2nd Most likely written by: **{cnn_name}**", icon="✅")
-            #st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
-            st.write("_" * 30)
-            # rain(
-            #     emoji="😐",
-            #     font_size=54,
-            #     falling_speed=5,
-            #     animation_length="infinite",
-            # )
-    else:
-        # Repeat the text with a space at the end of each iteration
-
-        # Load proper pre-trained for full texts
-        file_prefix = 'not_trancated_full_paragraph.xlsx'
-        with open(f"{file_prefix}_ridge_model.pkl", 'rb') as file:
-            ridge_model = pickle.load(file)
-    
-        with open(f"{file_prefix}_extra_trees_model.pkl", 'rb') as file:
-            extra_trees_model = pickle.load(file)
-        
-        with open(f"{file_prefix}_vectorizer.pkl", 'rb') as file:
-            vectorizer = pickle.load(file)
-        
-        repeated_text = ""
-        max_word_count = 500
-        amplify = 1
-        if word_count >= max_word_count:
-            amplify = 2
-        else:
-            amplify = math.ceil(max_word_count / word_count)
-        
-        for _ in range(amplify):
-            repeated_text += new_text + " "
-
-        new_text = repeated_text
-        
-        word_count = len(re.findall(r'\w+', new_text))
-        ## Repeat ML 
-        
-        # Transform the input
-        user_input_transformed = vectorizer.transform([new_text])
-    
-        # Make predictions
-        ridge_prediction = ridge_model.predict(user_input_transformed)
-        extra_trees_prediction = extra_trees_model.predict(user_input_transformed)
-        
-        ### Repeat DL
-        predicted_author, author_probabilities = predict_author(new_text, loaded_model, tokenizer, label_encoder)
-        sorted_probabilities = sorted(author_probabilities.items(), key=lambda x: x[1], reverse=True)
-
-        new_max_cnn_prob_name = sorted_probabilities[0][0]
-        new_max_cnn_prob = float(sorted_probabilities[0][1])
-        
-        # Get disply name
-        cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
-        with st.expander("2nd iteration Details..."):
-            st.write(f"Ridge: {ridge_name}")
-            st.write(f"ExtraTree: {extra_trees_name}")
-            st.write(f"CNN: {cnn_name}")
-            for author, prob in sorted_probabilities:
-                display_name = author_map.get(author, author) 
-                st.write(f"{display_name}: {prob * 100:.2f}%")
-                st.progress(float(prob))
-                
-        if ridge_prediction == extra_trees_prediction == predicted_author:
-            st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
-            st.warning(f"**Notice:** Your input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
-            st.write("_" * 30)
-            # rain(
-            #     emoji="😃",
-            #     font_size=54,
-            #     falling_speed=5,
-            #     animation_length="infinite",
-            # )
-        elif new_max_cnn_prob_name == max_cnn_prob_name:
-            st.success(f"Most likely written by: **{cnn_name}**", icon="✅")
-            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
-            st.write("_" * 30)
-            # rain(
-            #     emoji="😐",
-            #     font_size=54,
-            #     falling_speed=5,
-            #     animation_length="infinite",
-            # )
-            
         elif ridge_prediction == extra_trees_prediction:
             st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
             st.success(f"2nd Most likely written by: **{cnn_name}**", icon="✅")
-            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
             st.write("_" * 30)
-            # rain(
-            #     emoji="😐",
-            #     font_size=54,
-            #     falling_speed=5,
-            #     animation_length="infinite",
-            # )
-            
-        elif extra_trees_prediction == predicted_author:
-            st.success(f"Most likely written by: **{extra_trees_name}**", icon="✅")
-            st.success(f"2nd Most likely written by: **{ridge_name}**", icon="✅")
-            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
-            st.write("_" * 30)
-            # rain(
-            #     emoji="😐",
-            #     font_size=54,
-            #     falling_speed=5,
-            #     animation_length="infinite",
-            # )
-            
-        elif ridge_prediction == predicted_author:
-            st.success(f"Most likely written by: **{ridge_name}**", icon="✅")
-            st.success(f"2nd Most likely written by: **{extra_trees_name}**", icon="✅")
-            st.warning(f"**Notice:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
-            st.write("_" * 30)
-            # rain(
-            #     emoji="😐",
-            #     font_size=54,
-            #     falling_speed=5,
-            #     animation_length="infinite",
-            # )
 
-            
         else:
             st.warning("Notice 1: There is a difficulity predicting your text, it might fill into one of the below:", icon="⚠️")
             st.success(f"1- **{ridge_name}**", icon="✅")
             st.success(f"2- **{cnn_name}**", icon="✅")
             st.success(f"3- **{extra_trees_name}**", icon="✅")
-            st.warning(f"**Notice 2:** The input text has been magnified {amplify} times to better capture its characteristics and patterns.", icon="⚠️")
-            st.write("_" * 30)
-            # rain(
-            #     emoji="😕",
-            #     font_size=54,
-            #     falling_speed=5,
-            #     animation_length="infinite",
-            # )
 
 
-        # with st.expander("What is this project about?"):
-        #     st.write("""
-        #     This project is part of an MSc in Data Analytics at the University of Portsmouth.
-        #     Developed by Jaifar Al Shizawi, it aims to identify whether a text is written by a human or a specific Large Language Model (LLM) like ChatGPT-3, ChatGPT-4, Google Bard, or HuggingChat.
-        #     For inquiries, contact [up2152209@myport.ac.uk](mailto:up2152209@myport.ac.uk).
-        #     Supervised by Dr. Mohamed Bader.
-        #     """)
-        
-    # for author, prob in sorted_probabilities:
-    #     display_name = author_map.get(author, author)  # Retrieve the display name, fall back to original if not found
-    #     st.write(f"{display_name}: {prob * 100:.2f}%")
-    #     st.progress(float(prob))
+ 
 
 # Using expander to make FAQ sections
 st.subheader("Frequently Asked Questions (FAQ)")
@@ -566,11 +431,6 @@ with st.expander("Can I use this as evidence?"):
     """)
 
 
-# # Creates a button named 'Press me'
-# list_dir = st.button("list")
-# if list_dir:
-#     st.write("Listing directory contents:")
-#     st.write(os.listdir('.'))
 
 
 
