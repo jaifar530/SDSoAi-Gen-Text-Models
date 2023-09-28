@@ -317,7 +317,7 @@ if press_me_button:
     }
 
     cnn_name, ridge_name, extra_trees_name = get_author_display_name(predicted_author, ridge_prediction, extra_trees_prediction)
-    with st.expander("Modeling Details (Click Here)..."):
+    with st.expander("Prediction Details (Click Here)..."):
         st.write(f"Ridge: {ridge_name}")
         st.write(f"ExtraTree: {extra_trees_name}")
         st.write(f"CNN: {cnn_name}")
