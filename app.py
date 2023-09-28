@@ -179,9 +179,10 @@ def check_and_download_files():
             missing_files.append(file_name)
 
     if missing_files:
-        st.write("The following files are missing:")
-        for file_name in missing_files:
-            st.write(file_name)
+        #st.write("The following files are missing:")
+        st.write("Some files are missing")
+        # for file_name in missing_files:
+        #     st.write(file_name)
         
         # if not has_internet_connection():
         #     st.write("No internet connection. Cannot download missing files.")
@@ -320,8 +321,10 @@ if press_me_button:
         st.write(f"Ridge: {ridge_name}")
         st.write(f"ExtraTree: {extra_trees_name}")
         st.write(f"CNN: {cnn_name}")
+        st.write("_" * 10)
+        st.write("CNN Prediction Probabilities:")
         for author, prob in sorted_probabilities:
-            display_name = author_map.get(author, author)  # Retrieve the display name, fall back to original if not found
+            display_name = author_map.get(author, author)
             st.write(f"{display_name}: {prob * 100:.2f}%")
             st.progress(float(prob))
             
